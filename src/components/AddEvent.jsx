@@ -10,14 +10,14 @@ function AddEvent(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { groupId } = props;
-        const requestBody = { title, description, groupId };
+        const requestBody = { title, content, groupId };
 
         axios
             .post(`${API_URL}/api/events`, requestBody)
             .then((response) => {
                 setTitle("");
                 setContent("");
-                props.refreshGroup();
+                props.refreshEvents();
             })
             .catch((error) => console.log(error));
     };
