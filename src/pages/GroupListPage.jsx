@@ -19,17 +19,22 @@ function GroupListPage() {
     }, []);
 
     return (
-        <div className="GroupListPage">
-            <AddGroup refreshGroups={getAllGroups} />
+        <div className="flex justify-center gap-10 p-10">
+            <div className="flex-col gap-20 w-1/2 m-2 border">
             {groups.map((group) => {
                 return (
-                    <div className="GroupCard card" key={group._id}>
+                    <div className="GroupCard card shadow border m-2 hover:bg-gray-100" key={group._id}>
                         <Link to={`/groups/${group._id}`}>
                             <h3>{group.name}</h3>
+                            <h2>{group.description}</h2>
                         </Link>
                     </div>
                 );
             })}
+            </div>
+            
+            <AddGroup refreshGroups={getAllGroups} />
+
         </div>
     );
 }

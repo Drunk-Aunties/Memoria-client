@@ -24,13 +24,16 @@ function GroupDetailsPage(props) {
     }, []);
 
     return (
-        <div className="GroupDetails">
+        <div className="GroupDetails w-full p-10">
+            <div className="flex items-end gap-10">
             {group && (
                 <>
-                    <h1>{group.title}</h1>
+                    <h1>{group.name}</h1>
                     <p>{group.description}</p>
                 </>
             )}
+            </div>
+            
             <AddEvent refreshGroup={getGroup} groupId={groupId} />
             {group &&
                 group.events.map((event) => (

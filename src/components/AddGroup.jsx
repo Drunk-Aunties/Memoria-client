@@ -23,8 +23,8 @@ function AddGroup(props) {
             .catch((error) => console.log(error));
     };
     return (
-        <div className="AddProject">
-            <h3>Add Group</h3>
+        <div className="border w-1/3">
+            <h3>Create a new group</h3>
 
             <form onSubmit={handleSubmit}>
                 <label>Name:</label>
@@ -33,7 +33,10 @@ function AddGroup(props) {
                     name="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    className=" border border-gray"
                 />
+
+                <br />
 
                 <label>Description:</label>
                 <textarea
@@ -41,7 +44,10 @@ function AddGroup(props) {
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    className=" border border-gray"
+
                 />
+                <br />
 
                 <button type="submit">Submit</button>
             </form>
