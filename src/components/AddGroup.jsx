@@ -4,6 +4,7 @@ import axios from "axios";
 const API_URL = "http://localhost:5005";
 
 function AddGroup(props) {
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
 
@@ -16,7 +17,8 @@ function AddGroup(props) {
             .then((response) => {
                 setName("");
                 setDescription("");
-                props.refreshProjects();
+                props.refreshGroups();
+
             })
             .catch((error) => console.log(error));
     };
