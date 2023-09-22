@@ -6,7 +6,7 @@ import AddEvent from "../components/AddEvent";
 const API_URL = "http://localhost:5005";
 
 function EventDetailsPage(props) {
-    const [event, setEvents] = useState(null);
+    const [events, setEvents] = useState([]);
     const { eventId } = useParams();
 
     const getEvent = () => {
@@ -14,6 +14,7 @@ function EventDetailsPage(props) {
             .get(`${API_URL}/api/events/${eventId}`)
             .then((response) => {
                 const oneEvent = response.data;
+                console.log(oneEvent);
                 setEvents(oneEvent);
             })
             .catch((error) => console.log(error));
@@ -25,21 +26,15 @@ function EventDetailsPage(props) {
 
     return (
         <div className="EventDetails">
-            {event && (
+            {events && (
                 <>
-                    <h1>{event.title}</h1>
-                    <p>{event.content}</p>
+                    <h1>{events.title}</h1>
+                    <h4>Content:</h4>
+                    <p>{events.content}</p>
+                    <img src={events.imageUrl} alt="event" width="200" />
                 </>
             )}
             <AddEvent refreshEvent={getEvent} eventId={eventId} />
-            {event &&
-                event.map((e) => (
-                    <li className="EventCard card" key={e._id}>
-                        <h3>{e.title}</h3>
-                        <h4>Content:</h4>
-                        <p>{e.content}</p>
-                    </li>
-                ))}
 
             <Link to="/events">
                 <button>Back to Events</button>

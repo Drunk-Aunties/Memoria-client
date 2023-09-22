@@ -1,10 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-
+import service from "../services/file-upload.service";
 const API_URL = "http://localhost:5005";
 
 function AddGroup(props) {
-
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
 
@@ -18,7 +17,6 @@ function AddGroup(props) {
                 setName("");
                 setDescription("");
                 props.refreshGroups();
-
             })
             .catch((error) => console.log(error));
     };
@@ -45,7 +43,6 @@ function AddGroup(props) {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     className=" border border-gray"
-
                 />
                 <br />
 
