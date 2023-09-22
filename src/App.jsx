@@ -30,6 +30,7 @@ function App() {
                 <Route path="/events/edit/:eventId" element={<EditEventPage />}/>
                 <Route path="/signup" element={<SignupPage />}/>
                 <Route path="/login" element={<LoginPage />}/>
+                <Route path="/logout" element={<LoginPage />}/>
             </Routes>
         </>
     );
