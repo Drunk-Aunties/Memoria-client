@@ -48,7 +48,7 @@ function GroupDetailsPage(props) {
                     <br />
                     
 
-                    <AddGroupMember member={group?.members} fnUpdate={getGroup} />
+                    <AddGroupMember members={group?.members} fnUpdate={getGroup} />
                     
                 </div>
                 <div className="flex flex-col border">

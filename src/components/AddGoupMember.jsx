@@ -12,8 +12,10 @@ function AddGroupMember(props) {
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
-            let result = await axios.get(`${API_URL}/api/user`, email);
+            let result = await axios.get(`${API_URL}/api/user/${email}`,);
+            console.log(result);
             let newMemberList = [];
+            console.log(props.members);
             props.members
                 ? newMemberList = props.members
                 : null;
@@ -21,6 +23,7 @@ function AddGroupMember(props) {
             console.log(newMemberList);
             result = await axios.put(`${API_URL}/api/groups/${groupId}`, { members: newMemberList });
             props.fnUpdate();
+            setEmail('');
         }
         catch(error) {console.log(error)}
 
