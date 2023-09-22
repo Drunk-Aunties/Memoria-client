@@ -8,7 +8,11 @@ function HomePage() {
     return (
         <div>
             <h1>Home Page</h1>
-            <h2>Hello... {user}</h2>
+            {user
+            ? <h2>Hello... {user.name}</h2>
+            : <h2>Loading....</h2>
+            }
+            
         </div>
     );
 }
