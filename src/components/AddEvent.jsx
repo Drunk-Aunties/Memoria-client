@@ -40,7 +40,7 @@ function AddEvent(props) {
                 console.log(response);
                 setTitle("");
                 setContent("");
-                props.refreshEvents();
+                props.refreshGroup();
             })
             .catch((error) => console.log(error));
     };

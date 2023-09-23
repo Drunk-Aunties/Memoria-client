@@ -1,26 +1,36 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
 import AddGroupMember from "../components/AddGoupMember";
+
+
 
 
 
 const API_URL = "http://localhost:5005";
 
 function GroupDetailsPage(props) {
+    const navigate = useNavigate();
     const [group, setGroup] = useState(null);
     const { groupId } = useParams();
+    let token = localStorage.getItem('authToken');
+
 
     const getGroup = () => {
         axios
-            .get(`${API_URL}/api/groups/${groupId}`)
+            .get(`${API_URL}/api/groups/${groupId}`,
+            { headers: { Authorization: `Bearer ${token}`} }
+            )
             .then((response) => {
                 const oneGroup = response.data;
                 setGroup(oneGroup);
                 console.log(group.members)
             })
-            .catch((error) => console.log(error));
+            .catch((error) => 
+            {error &&
+                navigate('/error', { state: { id: error.response.status, message: error.response.statusText, reason: error.response.data.message } })
+            console.log(error);})
     };
 
     useEffect(() => {

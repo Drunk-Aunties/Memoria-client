@@ -10,6 +10,9 @@ import EventDetailsPage from "./pages/EventDetailsPage";
 import EditEventPage from "./pages/EditEventPage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
+import ErrorPage from "./pages/ErrorPage";
+
+
 
 
 
@@ -31,6 +34,7 @@ function App() {
                 <Route path="/signup" element={<SignupPage />}/>
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/logout" element={<LoginPage />}/>
+                <Route path="/error" element={<ErrorPage />}/>
             </Routes>
         </>
     );
