@@ -8,7 +8,7 @@ const API_URL = "http://localhost:5005";
 
 
 function LoginPage() {
-    const { storeToken } = useContext(AuthContext);   //  <== ADD
+    const { storeToken,authenticateUser } = useContext(AuthContext); 
 
     const navigate = useNavigate();
 
@@ -21,6 +21,7 @@ function LoginPage() {
             .then((response) => {
                 console.log(response.data.authToken );
                 storeToken(response.data.authToken);
+                authenticateUser();
                 navigate('/')
             })
             .catch((error) => console.log(error));

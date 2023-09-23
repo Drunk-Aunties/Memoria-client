@@ -13,6 +13,7 @@ const API_URL = "http://localhost:5005";
 function GroupDetailsPage(props) {
     const navigate = useNavigate();
     const [group, setGroup] = useState(null);
+    const [memories, setMemories] = useState([]);
     const { groupId } = useParams();
     let token = localStorage.getItem('authToken');
 
@@ -25,7 +26,6 @@ function GroupDetailsPage(props) {
             .then((response) => {
                 const oneGroup = response.data;
                 setGroup(oneGroup);
-                console.log(group.members)
             })
             .catch((error) => 
             {error &&
@@ -33,8 +33,19 @@ function GroupDetailsPage(props) {
             console.log(error);})
     };
 
+    const getEvent = () => {
+        axios
+        .get(`${API_URL}/api/groups/${groupId}/events`)
+        .then((response) => setMemories(response.data))
+        .catch((error) => 
+        {error &&
+            navigate('/error', { state: { id: error.response.status, message: error.response.statusText, reason: error.response.data.message } })
+        console.log(error);})
+    }
+
     useEffect(() => {
         getGroup();
+        getEvent();
     }, []);
 
     return (
@@ -63,12 +74,12 @@ function GroupDetailsPage(props) {
                 </div>
                 <div className="flex flex-col border">
                     <AddEvent refreshGroup={getGroup} groupId={groupId} />
-                    {group &&
-                        group.events.map((event) => (
-                            <li className="EventCard card" key={event._id}>
-                                <h3>{event.title}</h3>
+                    {memories &&
+                        memories.map((memory) => (
+                            <li className="EventCard card" key={memory._id}>
+                                <h3>{memory.title}</h3>
                                 <h4>Description:</h4>
-                                <p>{event.description}</p>
+                                <p>{memory.content}</p>
                             </li>
                         ))}
 
