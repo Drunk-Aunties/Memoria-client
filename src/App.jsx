@@ -11,12 +11,8 @@ import EditEventPage from "./pages/EditEventPage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/ErrorPage";
-
-
-
-
-
-
+import UserDetailsPage from "./pages/UserDetailsPage";
+import EditUserPage from "./pages/EditUserPage";
 
 function App() {
     return (
@@ -27,14 +23,22 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/groups" element={<GroupListPage />} />
                 <Route path="/groups/:groupId" element={<GroupDetailsPage />} />
-                <Route path="/groups/edit/:groupId" element={<EditGroupPage />}/>
+                <Route
+                    path="/groups/edit/:groupId"
+                    element={<EditGroupPage />}
+                />
                 <Route path="/events" element={<EventListPage />} />
                 <Route path="/events/:eventId" element={<EventDetailsPage />} />
-                <Route path="/events/edit/:eventId" element={<EditEventPage />}/>
-                <Route path="/signup" element={<SignupPage />}/>
-                <Route path="/login" element={<LoginPage />}/>
-                <Route path="/logout" element={<LoginPage />}/>
-                <Route path="/error" element={<ErrorPage />}/>
+                <Route
+                    path="/events/edit/:eventId"
+                    element={<EditEventPage />}
+                />
+                <Route path="/users/:userId" element={<UserDetailsPage />} />
+                <Route path="/users/edit/:userId" element={<EditUserPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/logout" element={<LoginPage />} />
+                <Route path="/error" element={<ErrorPage />} />
             </Routes>
         </>
     );
