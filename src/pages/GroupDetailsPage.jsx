@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
 import AddGroupMember from "../components/AddGoupMember";
+import MemoryCard from "../components/MemoryCard";
 
 const API_URL = "http://localhost:5005";
 
@@ -86,12 +87,7 @@ function GroupDetailsPage(props) {
 
                     {memories &&
                         memories.map((memory) => (
-                            <div className="EventCard card" key={memory._id}>
-                                <h3>{memory.title}</h3>
-                                <h4>Description:</h4>
-                                <p>{memory.content}</p>
-                                <img src={memory.imageUrl} alt="" />
-                            </div>
+                            <MemoryCard memory={memory} key={memory._id} />
                         ))}
                 </div>
             </div>
