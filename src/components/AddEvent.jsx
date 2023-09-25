@@ -35,13 +35,11 @@ function AddEvent(props) {
         e.preventDefault();
         const { groupId } = props;
         const requestBody = { title, content, groupId, imageUrl };
-        console.log(requestBody);
 
         axios
             .post(`${API_URL}/api/events`, requestBody, 
             { headers: { Authorization: `Bearer ${token}`} })
             .then((response) => {
-                console.log(response);
                 setTitle("");
                 setContent("");
                 props.refreshGroup();

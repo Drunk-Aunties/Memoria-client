@@ -4,7 +4,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
 import AddGroupMember from "../components/AddGoupMember";
 
-
 const API_URL = "http://localhost:5005";
 
 function GroupDetailsPage(props) {
@@ -12,34 +11,46 @@ function GroupDetailsPage(props) {
     const [group, setGroup] = useState(null);
     const [memories, setMemories] = useState([]);
     const { groupId } = useParams();
-    let token = localStorage.getItem('authToken');
-
+    let token = localStorage.getItem("authToken");
 
     const getGroup = () => {
         axios
-            .get(`${API_URL}/api/groups/${groupId}`,
-            { headers: { Authorization: `Bearer ${token}`} }
-            )
+            .get(`${API_URL}/api/groups/${groupId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             .then((response) => {
                 const oneGroup = response.data;
                 setGroup(oneGroup);
             })
-            .catch((error) => 
-            {error &&
-                navigate('/error', { state: { id: error.response.status, message: error.response.statusText, reason: error.response.data.message } })
-            console.log(error);})
+            .catch((error) => {
+                error &&
+                    navigate("/error", {
+                        state: {
+                            id: error.response.status,
+                            message: error.response.statusText,
+                            reason: error.response.data.message,
+                        },
+                    });
+                console.log(error);
+            });
     };
 
     const getEvent = () => {
         axios
-        .get(`${API_URL}/api/groups/${groupId}/events`)
-        .then((response) => setMemories(response.data))
-        .catch((error) => 
-        {error &&
-            navigate('/error', { state: { id: error.response.status, message: error.response.statusText, reason: error.response.data.message } })
-        console.log(error);})
-    }
-
+            .get(`${API_URL}/api/groups/${groupId}/events`)
+            .then((response) => setMemories(response.data))
+            .catch((error) => {
+                error &&
+                    navigate("/error", {
+                        state: {
+                            id: error.response.status,
+                            message: error.response.statusText,
+                            reason: error.response.data.message,
+                        },
+                    });
+                console.log(error);
+            });
+    };
     useEffect(() => {
         getGroup();
         getEvent();
@@ -52,22 +63,22 @@ function GroupDetailsPage(props) {
                     <>
                         <h1>{group.name}</h1>
                         <p>{group.description}</p>
+                        <img src={group.imageUrl} alt="event" width="200" />
                     </>
                 )}
             </div>
-            
-
             <div className="flex p-10 gap-10">
                 <div className="flex-col w-1/2 justify-start border ">
                     {group?.members
-                        ? group.members.map((member) => { return (<p key={member._id}>{member.name}</p>) })
-                        : null
-                    }
+                        ? group.members.map((member) => {
+                              return <p key={member._id}>{member.name}</p>;
+                          })
+                        : null}
                     <br />
-                    
-
-                    <AddGroupMember members={group?.members} fnUpdate={getGroup} />
-                    
+                    <AddGroupMember
+                        members={group?.members}
+                        fnUpdate={getGroup}
+                    />
                 </div>
                 <div className="flex flex-col border">
                     <AddEvent refreshGroup={getEvent} groupId={groupId} />
@@ -82,30 +93,14 @@ function GroupDetailsPage(props) {
                                 <img src={memory.imageUrl} alt="" />
                             </div>
                         ))}
-
-                    
                 </div>
-                
-
-
             </div>
             <Link to="/groups">
-                        <button>Back to Groups</button>
-                    </Link>
-                    <Link to={`/groups/edit/${groupId}`}>
-                        <button>Edit Group</button>
-                    </Link>
-
-
-
-
-
-
-
-
-
-
-
+                <button>Back to Groups</button>
+            </Link>
+            <Link to={`/groups/edit/${groupId}`}>
+                <button>Edit Group</button>
+            </Link>
         </div>
     );
 }

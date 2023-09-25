@@ -6,16 +6,34 @@ const API_URL = "http://localhost:5005";
 function AddGroup(props) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    let token = localStorage.getItem('authToken');
+    const [imageUrl, setImageUrl] = useState("");
 
+    const handleFileUpload = (e) => {
+        const uploadData = new FormData();
+        console.log("The file to be uploaded is: ", e.target.files[0]);
+        uploadData.append("imageUrl", e.target.files[0]);
+
+        service
+            .uploadImage(uploadData)
+            .then((response) => {
+                // response carries "fileUrl" which we can use to update the state
+                setImageUrl(response.fileUrl);
+                console.log("response is: ", response);
+            })
+            .catch((err) =>
+                console.log("Error while uploading the file: ", err)
+            );
+    };
+    let token = localStorage.getItem("authToken");
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const requestBody = { name, description };
+        const requestBody = { name, description, imageUrl };
         axios
-            .post(`${API_URL}/api/groups`, requestBody,
-            { headers: { Authorization: `Bearer ${token}`} })
+            .post(`${API_URL}/api/groups`, requestBody, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             .then((response) => {
                 setName("");
                 setDescription("");
@@ -48,6 +66,7 @@ function AddGroup(props) {
                     className=" border border-gray"
                 />
                 <br />
+                <input type="file" onChange={(e) => handleFileUpload(e)} />
 
                 <button type="submit">Submit</button>
             </form>
