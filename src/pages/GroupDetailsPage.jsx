@@ -58,7 +58,7 @@ function GroupDetailsPage(props) {
     }, []);
 
     return (
-        <div className="GroupDetails w-full p-10">
+        <div className="w-screen p-10">
             <div className="flex items-end gap-10">
                 {group && (
                     <>
@@ -68,8 +68,8 @@ function GroupDetailsPage(props) {
                     </>
                 )}
             </div>
-            <div className="flex p-10 gap-10">
-                <div className="flex-col w-1/2 justify-start border ">
+            <div className="flex p-10 gap-10 justify-center">
+                <div className="flex-col w-1/2 justify-start border max-w-sm">
                     {group?.members
                         ? group.members.map((member) => {
                               return <p key={member._id}>{member.name}</p>;
@@ -80,7 +80,7 @@ function GroupDetailsPage(props) {
                         fnUpdate={getGroup}
                     />
                 </div>
-                <div className="flex flex-col border">
+                <div className="flex flex-col border max-w-2xl">
                     <AddEvent refreshGroup={getEvent} groupId={groupId} />
 
                     {memories &&

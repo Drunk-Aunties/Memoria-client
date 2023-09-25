@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
+import EditMemoryCard from "../components/EditMemoryCard";
+import MemoryCard from "../components/MemoryCard";
+
 
 const API_URL = "http://localhost:5005";
 
@@ -14,7 +17,6 @@ function EventDetailsPage(props) {
             .get(`${API_URL}/api/events/${eventId}`)
             .then((response) => {
                 const oneEvent = response.data;
-                console.log(oneEvent);
                 setEvents(oneEvent);
             })
             .catch((error) => console.log(error));
@@ -25,24 +27,19 @@ function EventDetailsPage(props) {
     }, []);
 
     return (
-        <div className="EventDetails">
-            {events && (
-                <>
-                    <h1>{events.title}</h1>
-                    <h4>Content:</h4>
-                    <p>{events.content}</p>
-                    <img src={events.imageUrl} alt="event" width="200" />
-                </>
-            )}
-            <AddEvent refreshEvent={getEvent} eventId={eventId} />
 
-            <Link to="/events">
-                <button>Back to Events</button>
-            </Link>
-            <Link to={`/events/edit/${eventId}`}>
-                <button>Edit Event</button>
-            </Link>
+        <div className="flex flex-col items-center justify-center">
+            {events && (
+                <div className="w-full max-w-3xl">
+                    <Link to="/events"><button>Back to Events</button></Link>
+                    <Link to={`/events/${eventId}/edit/`}><button>Edit Event</button></Link>
+                    <MemoryCard memory={events} />
+                </div>
+            )}
+
+
         </div>
+
     );
 }
 
