@@ -6,13 +6,16 @@ const API_URL = "http://localhost:5005";
 function AddGroup(props) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    let token = localStorage.getItem('authToken');
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const requestBody = { name, description };
         axios
-            .post(`${API_URL}/api/groups`, requestBody)
+            .post(`${API_URL}/api/groups`, requestBody,
+            { headers: { Authorization: `Bearer ${token}`} })
             .then((response) => {
                 setName("");
                 setDescription("");

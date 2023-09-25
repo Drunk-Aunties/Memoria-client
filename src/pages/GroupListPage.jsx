@@ -6,11 +6,13 @@ import AddGroup from "../components/AddGroup";
 const API_URL = "http://localhost:5005";
 
 function GroupListPage() {
+    let token = localStorage.getItem('authToken');
     const [groups, setGroups] = useState([]);
 
     const getAllGroups = () => {
         axios
-            .get(`${API_URL}/api/groups`)
+            .get(`${API_URL}/api/groups`,
+            { headers: { Authorization: `Bearer ${token}`} })
             .then((response) => setGroups(response.data))
             .catch((error) => console.log(error));
     };
