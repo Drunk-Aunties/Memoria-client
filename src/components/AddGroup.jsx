@@ -24,13 +24,16 @@ function AddGroup(props) {
                 console.log("Error while uploading the file: ", err)
             );
     };
+    let token = localStorage.getItem("authToken");
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const requestBody = { name, description, imageUrl };
         axios
-            .post(`${API_URL}/api/groups`, requestBody)
+            .post(`${API_URL}/api/groups`, requestBody, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             .then((response) => {
                 setName("");
                 setDescription("");

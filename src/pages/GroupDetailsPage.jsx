@@ -81,13 +81,14 @@ function GroupDetailsPage(props) {
                     />
                 </div>
                 <div className="flex flex-col border">
-                    <AddEvent refreshGroup={getGroup} groupId={groupId} />
+                    <AddEvent refreshGroup={getEvent} groupId={groupId} />
                     {memories &&
                         memories.map((memory) => (
                             <li className="EventCard card" key={memory._id}>
                                 <h3>{memory.title}</h3>
                                 <h4>Description:</h4>
                                 <p>{memory.content}</p>
+                                <img src={memory.imageUrl} alt="" />
                             </li>
                         ))}
                 </div>
