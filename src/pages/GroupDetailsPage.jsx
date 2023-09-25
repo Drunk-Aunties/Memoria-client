@@ -76,14 +76,12 @@ function GroupDetailsPage(props) {
                           })
                         : null}
                     <br />
-                    <AddGroupMember
-                        members={group?.members}
+                    <AddGroupMember members={group?.members}
                         fnUpdate={getGroup}
                     />
                 </div>
                 <div className="flex flex-col border">
                     <AddEvent refreshGroup={getEvent} groupId={groupId} />
-
 
                     {memories &&
                         memories.map((memory) => (

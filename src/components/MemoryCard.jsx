@@ -8,8 +8,8 @@ export default function MemoryCard(props) {
     let time = Date.now() - props.memory.createdAt;
     let date = new Date (props.memory.createdAt)
     let time2 = Date.now() - date
-    let secs = time2/1000/60
-    console.log(secs);
+    let mins = time2/1000/60
+    console.log(mins);
 
 
 
@@ -30,6 +30,7 @@ export default function MemoryCard(props) {
                 <p>{props.memory.content}</p>
                 <img src={props.memory.imageUrl} alt="" className="rounded-lg" />
                 <br />
+                <span className="text-right">{props.memory.createdAt.slice(0,10)}</span>
 
 
                 <div className=" flex p-2 justify-between">
