@@ -11,6 +11,9 @@ function AddEvent(props) {
     const [imageUrl, setImageUrl] = useState("");
     const navigate = useNavigate();
 
+    let token = localStorage.getItem('authToken');
+
+
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
         console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -35,7 +38,8 @@ function AddEvent(props) {
         console.log(requestBody);
 
         axios
-            .post(`${API_URL}/api/events`, requestBody)
+            .post(`${API_URL}/api/events`, requestBody, 
+            { headers: { Authorization: `Bearer ${token}`} })
             .then((response) => {
                 console.log(response);
                 setTitle("");
