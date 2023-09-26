@@ -31,15 +31,12 @@ function EventListPage() {
 
     return (
         <>
-        <p>hello</p>
         <div className="EventListPage">
             <div className="flex flex-col border max-w-2xl">
                 <AddEvent refreshEvents={getEvent} groupId = {groupId}/>
                 {memories &&
                     memories.map((memory) => (
-                        <NavLink to={`/events/${memory._id}`} key = {memory._id}>
-                            <MemoryCard memory={memory} key={memory._id} />
-                        </NavLink>
+                            <MemoryCard memory={memory} key={memory._id}  />
                     ))}
             </div>
         </div>

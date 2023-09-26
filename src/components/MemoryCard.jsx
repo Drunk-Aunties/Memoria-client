@@ -13,9 +13,9 @@ export default function MemoryCard(props) {
     };
 
     const onClickFavButton = (e) => {
-        const requestBody = { favorite: true };
+        const requestBody = { favorite: !props.memory.favorite };
         axios.put(
-            `${import.meta.env.VITE_API_URL}/api/events/${eventId}`,
+            `${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`,
             requestBody
         );
         // .then((response) => {
@@ -52,11 +52,13 @@ export default function MemoryCard(props) {
                     <div className="flex flex-col w-full">
                         <div className="flex justify-between p-5">
                             <div className="flex justify-between">
-                                <img
+
+                                <a href={`/events/${props.memory._id}`}><img
                                     src={props.memory.userId?.imageUrl}
                                     alt=""
                                     className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
-                                />
+                                /></a>
+                                
                                 <span className="font-bold text-xl m-2">
                                     {props.memory.userId?.name}
                                 </span>
