@@ -3,10 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 
-
-const API_URL = "http://localhost:5005";
-
-
 function LoginPage() {
     const { storeToken,authenticateUser } = useContext(AuthContext); 
 
@@ -17,7 +13,7 @@ function LoginPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(`${API_URL}/auth/login`, user)
+            .post(`${import.meta.env.VITE_API_URL}/auth/login`, user)
             .then((response) => {
                 console.log(response.data.authToken );
                 storeToken(response.data.authToken);

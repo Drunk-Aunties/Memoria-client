@@ -8,7 +8,7 @@ function UserDetailsPage(props) {
 
     const getUser = () => {
         axios
-            .get(`${import.meta.env.VITE_API_URL}/api/users/${userId}`)
+            .get(`${import.meta.env.VITE_API_URL}/api/users/id/${userId}`)
             .then((response) => {
                 const oneUser = response.data;
                 console.log(oneUser);
