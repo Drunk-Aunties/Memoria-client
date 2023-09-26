@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 
 export default function MemoryCard(props) {
-    let createdDate = new Date();
+    let createdDate = new Date(props.memory.createdAt);
     let timeDiff = Date.now() - createdDate;
     let friendlyTimeStamp;
 
