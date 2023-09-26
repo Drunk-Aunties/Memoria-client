@@ -23,6 +23,8 @@ export default function MemoryCard(props) {
         friendlyTimeStamp = `just now`;
     }
 
+    console.log(props.memory);
+
     return (
         <div className="flex border p-5 m-10 rounded-xl shadow-lg">
             {props.memory && (

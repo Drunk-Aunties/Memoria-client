@@ -13,6 +13,8 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 import EditUserPage from "./pages/EditUserPage";
 import MemoryCard from "./components/MemoryCard";
 import EditMemoryCard from "./components/EditMemoryCard";
+import EventDetailsPage from "./pages/EventDetailsPage";
+import EditEventPage from "./pages/EditEventPage";
 
 function App() {
     return (
@@ -28,10 +30,10 @@ function App() {
                     element={<EditGroupPage />}
                 />
                 <Route path="/events" element={<EventListPage />} />
-                <Route path="/events/:eventId" element={<MemoryCard />} />
+                <Route path="/events/:eventId" element={<EventDetailsPage />} />
                 <Route
                     path="/events/:eventId/edit/"
-                    element={<EditMemoryCard />}
+                    element={<EditEventPage />}
                 />
                 <Route path="/users/:userId" element={<UserDetailsPage />} />
                 <Route path="/users/edit/:userId" element={<EditUserPage />} />

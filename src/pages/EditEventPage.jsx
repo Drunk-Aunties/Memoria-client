@@ -108,7 +108,7 @@ function EditEventPage(props) {
         axios
             .delete(`${API_URL}/api/events/${eventId}`)
             .then(() => {
-                navigate("/events");
+                navigate(`/groups/${event.groupId._id}`);
             })
             .catch((err) => console.log(err));
     };
@@ -124,11 +124,9 @@ function EditEventPage(props) {
 
             
             <div>
-                <a href={`/events/${event._id}`}><i className=""><button className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={handleFormSubmit} type="submit" form="editForm">Update</button></i></a>
-                <button type="submit"></button>
+                <button className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={handleFormSubmit} type="submit" form="editForm">Update</button>
 
-
-                <a href={`/events/${event._id}`}><i className=""><button className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 " onClick={deleteEvent} >Delete</button></i></a>
+                <button className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 " onClick={deleteEvent} >Delete</button>
 
             </div>
 
@@ -177,19 +175,10 @@ function EditEventPage(props) {
                             </div>
 
 
-
-
                         </form>
                         </div>
 
-
-
-
-
                     </>
-
-
-
 
 
                 )}

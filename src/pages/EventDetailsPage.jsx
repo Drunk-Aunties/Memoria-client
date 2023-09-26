@@ -36,10 +36,7 @@ function EventDetailsPage(props) {
                     <MemoryCard memory={events} />
                 </div>
             )}
-
-
         </div>
-
     );
 }
 

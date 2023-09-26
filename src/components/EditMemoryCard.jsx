@@ -8,6 +8,7 @@ import axios from "axios";
 
 
 export default function EditMemoryCard(props) {
+    console.log(props);
     const navigate = useNavigate();
     // console.log(props.memory.groupId._id)
     let createdDate = new Date(props.memory.createdAt)
@@ -48,7 +49,7 @@ export default function EditMemoryCard(props) {
                             <br />
                             <img src={props.memory.imageUrl} alt="" className="rounded-lg" />
                             <br />
-                            <span className="text-right">{props.memory.createdAt}</span>
+                            {/* <span className="text-right">{props.memory.createdAt}</span> */}
 
 
                             <div className=" flex p-2 justify-between">

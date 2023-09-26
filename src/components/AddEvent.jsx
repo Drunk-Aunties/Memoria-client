@@ -42,7 +42,7 @@ function AddEvent(props) {
             .then((response) => {
                 setTitle("");
                 setContent("");
-                props.refreshGroup();
+                props.refreshEvents();
             })
             .catch((error) => console.log(error));
     };
