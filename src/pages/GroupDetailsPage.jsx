@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import AddEvent from "../components/AddEvent";
 import AddGroupMember from "../components/AddGoupMember";
-import MemoryCard from "../components/MemoryCard";
+import EventListPage from "../pages/EventListPage";
 
 const API_URL = "http://localhost:5005";
 
 function GroupDetailsPage(props) {
     const navigate = useNavigate();
     const [group, setGroup] = useState(null);
-    const [memories, setMemories] = useState([]);
     const { groupId } = useParams();
     let token = localStorage.getItem("authToken");
 
@@ -36,25 +34,8 @@ function GroupDetailsPage(props) {
             });
     };
 
-    const getEvent = () => {
-        axios
-            .get(`${API_URL}/api/groups/${groupId}/events`)
-            .then((response) => setMemories(response.data))
-            .catch((error) => {
-                error &&
-                    navigate("/error", {
-                        state: {
-                            id: error.response.status,
-                            message: error.response.statusText,
-                            reason: error.response.data.message,
-                        },
-                    });
-                console.log(error);
-            });
-    };
     useEffect(() => {
         getGroup();
-        getEvent();
     }, []);
 
     return (
@@ -76,18 +57,12 @@ function GroupDetailsPage(props) {
                           })
                         : null}
                     <br />
-                    <AddGroupMember members={group?.members}
+                    <AddGroupMember
+                        members={group?.members}
                         fnUpdate={getGroup}
                     />
                 </div>
-                <div className="flex flex-col border max-w-2xl">
-                    <AddEvent refreshGroup={getEvent} groupId={groupId} />
-
-                    {memories &&
-                        memories.map((memory) => (
-                            <MemoryCard memory={memory} key={memory._id} />
-                        ))}
-                </div>
+                <EventListPage />
             </div>
             <Link to="/groups">
                 <button>Back to Groups</button>

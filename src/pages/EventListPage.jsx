@@ -1,35 +1,46 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
+import MemoryCard from "../components/MemoryCard";
 
 const API_URL = "http://localhost:5005";
 
 function EventListPage() {
-    const [events, setEvents] = useState([]);
+    const [memories, setMemories] = useState([]);
+    const { groupId } = useParams();
 
-    const getAllEvents = () => {
+    const getEvent = () => {
         axios
-            .get(`${API_URL}/api/events`)
-            .then((response) => setEvents(response.data))
-            .catch((error) => console.log(error));
+            .get(`${API_URL}/api/groups/${groupId}/events`)
+            .then((response) => setMemories(response.data))
+            .catch((error) => {
+                error &&
+                    navigate("/error", {
+                        state: {
+                            id: error.response.status,
+                            message: error.response.statusText,
+                            reason: error.response.data.message,
+                        },
+                    });
+                console.log(error);
+            });
     };
     useEffect(() => {
-        getAllEvents();
+        getEvent();
     }, []);
 
     return (
         <div className="EventListPage">
-            <AddEvent refreshEvents={getAllEvents} />
-            {events.map((event) => {
-                return (
-                    <div className="EventCard card" key={event._id}>
-                        <Link to={`/events/${event._id}`}>
-                            <h3>{event.title}</h3>
-                        </Link>
-                    </div>
-                );
-            })}
+            <div className="flex flex-col border max-w-2xl">
+                <AddEvent refreshEvents={getEvent} />
+                {memories &&
+                    memories.map((memory) => (
+                        <NavLink to={`/events/${memory._id}`}>
+                            <MemoryCard memory={memory} key={memory._id} />
+                        </NavLink>
+                    ))}
+            </div>
         </div>
     );
 }
