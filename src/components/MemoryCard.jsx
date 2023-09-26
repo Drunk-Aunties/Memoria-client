@@ -4,23 +4,25 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 
 export default function MemoryCard(props) {
-    const [isClicked, setIsClicked] = useState(false);
-    const { eventId } = useParams();
+    const [isClicked, setIsClicked] = useState(props.memory.favorite);
 
     const handleClick = () => {
         setIsClicked(!isClicked);
         onClickFavButton();
     };
 
-    const onClickFavButton = (e) => {
+    const onClickFavButton = () => {
         const requestBody = { favorite: !props.memory.favorite };
-        axios.put(
-            `${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`,
-            requestBody
-        );
-        // .then((response) => {
-        //     navigate(`/events/${eventId}`);
-        // });
+        axios
+            .put(
+                `${import.meta.env.VITE_API_URL}/api/events/${
+                    props.memory._id
+                }`,
+                requestBody
+            )
+            .then(() => {
+                props.onFavCallback();
+            });
     };
 
     let createdDate = new Date(props.memory.createdAt);
@@ -43,8 +45,6 @@ export default function MemoryCard(props) {
         friendlyTimeStamp = `just now`;
     }
 
-    console.log(props.memory);
-
     return (
         <div className="flex border p-5 m-10 rounded-xl shadow-lg">
             {props.memory && (
@@ -52,13 +52,14 @@ export default function MemoryCard(props) {
                     <div className="flex flex-col w-full">
                         <div className="flex justify-between p-5">
                             <div className="flex justify-between">
+                                <a href={`/events/${props.memory._id}`}>
+                                    <img
+                                        src={props.memory.userId?.imageUrl}
+                                        alt=""
+                                        className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
+                                    />
+                                </a>
 
-                                <a href={`/events/${props.memory._id}`}><img
-                                    src={props.memory.userId?.imageUrl}
-                                    alt=""
-                                    className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
-                                /></a>
-                                
                                 <span className="font-bold text-xl m-2">
                                     {props.memory.userId?.name}
                                 </span>
@@ -102,7 +103,7 @@ export default function MemoryCard(props) {
                                 onClick={handleClick}
                                 data-cy="FavTest"
                             >
-                                {props.memory.favorite || isClicked ? (
+                                {isClicked ? (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="30"

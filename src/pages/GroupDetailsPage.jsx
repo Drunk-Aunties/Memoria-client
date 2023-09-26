@@ -61,6 +61,7 @@ function GroupDetailsPage(props) {
                     />
                 </div>
                 <EventListPage />
+                {console.log(group)}
             </div>
             <Link to="/groups">
                 <button>Back to Groups</button>
