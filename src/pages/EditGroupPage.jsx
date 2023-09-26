@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
-
 function EditGroupPage(props) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -12,7 +10,7 @@ function EditGroupPage(props) {
 
     useEffect(() => {
         axios
-            .get(`${API_URL}/api/groups/${groupId}`)
+            .get(`${import.meta.env.VITE_API_URL}/api/groups/${groupId}`)
             .then((response) => {
                 const oneGroup = response.data;
                 setName(oneGroup.name);
@@ -25,7 +23,7 @@ function EditGroupPage(props) {
         e.preventDefault();
         const requestBody = { title, description };
         axios
-            .put(`${API_URL}/api/groups/${groupId}`, requestBody)
+            .put(`${import.meta.env.VITE_API_URL}/api/groups/${groupId}`, requestBody)
             .then((response) => {
                 navigate(`/groups/${groupId}`);
             });
@@ -33,7 +31,7 @@ function EditGroupPage(props) {
 
     const deleteGroup = () => {
         axios
-            .delete(`${API_URL}/api/groups/${groupId}`)
+            .delete(`${import.meta.env.VITE_API_URL}/api/groups/${groupId}`)
             .then(() => {
                 navigate("/groups");
             })
