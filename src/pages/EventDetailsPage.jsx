@@ -5,16 +5,13 @@ import AddEvent from "../components/AddEvent";
 import EditMemoryCard from "../components/EditMemoryCard";
 import MemoryCard from "../components/MemoryCard";
 
-
-const API_URL = "http://localhost:5005";
-
 function EventDetailsPage(props) {
     const [events, setEvents] = useState([]);
     const { eventId } = useParams();
 
     const getEvent = () => {
         axios
-            .get(`${API_URL}/api/events/${eventId}`)
+            .get(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`)
             .then((response) => {
                 const oneEvent = response.data;
                 setEvents(oneEvent);

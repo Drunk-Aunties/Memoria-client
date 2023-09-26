@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import service from "../services/file-upload.service";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
-
 function EditUserPage(props) {
     const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
@@ -15,7 +13,7 @@ function EditUserPage(props) {
 
     useEffect(() => {
         axios
-            .get(`${API_URL}/api/users/${userId}`)
+            .get(`${import.meta.env.VITE_API_URL}/api/users/${userId}`)
             .then((response) => {
                 const oneUser = response.data;
                 setName(oneUser.name);
@@ -47,7 +45,7 @@ function EditUserPage(props) {
         e.preventDefault();
         const requestBody = { name, lastname, imageUrl, birthdate };
         axios
-            .put(`${API_URL}/api/users/${userId}`, requestBody)
+            .put(`${import.meta.env.VITE_API_URL}/api/users/${userId}`, requestBody)
             .then((response) => {
                 navigate(`/users/${userId}`);
             });
@@ -55,7 +53,7 @@ function EditUserPage(props) {
 
     const deleteUser = () => {
         axios
-            .delete(`${API_URL}/api/users/${userId}`)
+            .delete(`${import.meta.env.VITE_API_URL}/api/users/${userId}`)
             .then(() => {
                 navigate("/users");
             })

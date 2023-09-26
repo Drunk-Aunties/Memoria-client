@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import service from "../services/file-upload.service";
-const API_URL = "http://localhost:5005";
 
 function AddGroup(props) {
     const [name, setName] = useState("");
@@ -31,7 +30,7 @@ function AddGroup(props) {
 
         const requestBody = { name, description, imageUrl };
         axios
-            .post(`${API_URL}/api/groups`, requestBody, {
+            .post(`${import.meta.env.VITE_API_URL}/api/groups`, requestBody, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {

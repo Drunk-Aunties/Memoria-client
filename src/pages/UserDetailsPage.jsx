@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
-const API_URL = "http://localhost:5005";
-
 function UserDetailsPage(props) {
     const [users, setUsers] = useState([]);
     const { userId } = useParams();
 
     const getUser = () => {
         axios
-            .get(`${API_URL}/api/users/${userId}`)
+            .get(`${import.meta.env.VITE_API_URL}/api/users/${userId}`)
             .then((response) => {
                 const oneUser = response.data;
                 console.log(oneUser);

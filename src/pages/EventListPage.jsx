@@ -4,15 +4,13 @@ import { NavLink, useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
 import MemoryCard from "../components/MemoryCard";
 
-const API_URL = "http://localhost:5005";
-
 function EventListPage() {
     const [memories, setMemories] = useState([]);
     const { groupId } = useParams();
 
     const getEvent = () => {
         axios
-            .get(`${API_URL}/api/groups/${groupId}/events`)
+            .get(`${import.meta.env.VITE_API_URL}/api/groups/${groupId}/events`)
             .then((response) => setMemories(response.data))
             .catch((error) => {
                 error &&

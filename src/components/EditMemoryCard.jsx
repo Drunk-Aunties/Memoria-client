@@ -16,13 +16,11 @@ export default function EditMemoryCard(props) {
     let timeDiff = Date.now() - createdDate
     let friendlyTimeStamp;
 
-    const API_URL = "http://localhost:5005";
-
 
     const deleteEvent = async (e) => {
         e.preventDefault();
         console.log(props.memory._id)
-       let result = await  axios.delete(`${API_URL}/api/events/${props.memory._id}`);
+       let result = await  axios.delete(`${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`);
        console.log(result);
        navigate(`/groups/${props.memory.groupId._id}`)
     }

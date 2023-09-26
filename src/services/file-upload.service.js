@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:5005/api",
+    baseURL: import.meta.env.VITE_API_UR+"/api",
     // withCredentials: true // => you might need this option if using cookies and sessions
 });
 

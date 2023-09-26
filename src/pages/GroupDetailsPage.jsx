@@ -4,8 +4,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import AddGroupMember from "../components/AddGoupMember";
 import EventListPage from "../pages/EventListPage";
 
-const API_URL = "http://localhost:5005";
-
 function GroupDetailsPage(props) {
     const navigate = useNavigate();
     const [group, setGroup] = useState(null);
@@ -14,7 +12,7 @@ function GroupDetailsPage(props) {
 
     const getGroup = () => {
         axios
-            .get(`${API_URL}/api/groups/${groupId}`, {
+            .get(`${import.meta.env.VITE_API_URL}/api/groups/${groupId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {

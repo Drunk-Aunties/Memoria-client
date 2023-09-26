@@ -3,8 +3,6 @@ import axios from "axios";
 import service from "../services/file-upload.service";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5005";
-
 function AddEvent(props) {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -37,7 +35,7 @@ function AddEvent(props) {
         const requestBody = { title, content, groupId, imageUrl };
 
         axios
-            .post(`${API_URL}/api/events`, requestBody, 
+            .post(`${import.meta.env.VITE_API_URL}/api/events`, requestBody, 
             { headers: { Authorization: `Bearer ${token}`} })
             .then((response) => {
                 setTitle("");
