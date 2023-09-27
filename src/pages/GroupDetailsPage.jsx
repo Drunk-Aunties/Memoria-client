@@ -44,6 +44,9 @@ function GroupDetailsPage(props) {
                         <h1>{group.name}</h1>
                         <p>{group.description}</p>
                         <img src={group.imageUrl} alt="event" width="200" />
+                        <Link to="/events/story">
+                            <button>Write Our Story</button>
+                        </Link>
                     </>
                 )}
             </div>
