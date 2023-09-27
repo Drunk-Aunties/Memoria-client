@@ -40,7 +40,6 @@ function EventListPage() {
                     ))}
             </div>
         </div>
-        
         </>
         
     );
