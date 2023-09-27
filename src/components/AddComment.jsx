@@ -7,7 +7,6 @@ function AddComment(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newComment = comments;
 
         axios
             .put(
@@ -21,7 +20,7 @@ function AddComment(props) {
             )
             .then((response) => {
                 setComments("");
-                // props.infoEvent.refreshEvents();
+                props.onFavCallback();
             })
             .catch((error) => console.log(error));
     };

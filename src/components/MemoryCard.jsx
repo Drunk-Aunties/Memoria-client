@@ -43,7 +43,6 @@ export default function MemoryCard(props) {
     } else {
         friendlyTimeStamp = `just now`;
     }
-
     return (
         <div className="flex border p-5 m-10 rounded-xl shadow-lg">
             {props.memory && (
@@ -85,7 +84,6 @@ export default function MemoryCard(props) {
                         <span className="text-right">
                             {props.memory.createdAt}
                         </span>
-
                         <div className=" flex p-2 justify-between">
                             {/* Font Awesome icons */}
                             <i
@@ -130,6 +128,9 @@ export default function MemoryCard(props) {
                                 data-testid="share-icon"
                             ></i>
                         </div>
+                        <span className="mx-auto">
+                            {console.log(props.memory.comments.text)}
+                        </span>
                         {props.memory.comments.map((comment, index) => {
                             return (
                                 <div key={index}>
@@ -140,14 +141,19 @@ export default function MemoryCard(props) {
                                             data-testid="comment-icon"
                                         ></i>
                                         <span className="mx-auto">
-                                            {comment}
+                                            {comment.text}
                                         </span>
+                                        <p>{comment.owner}</p>
                                     </div>
                                 </div>
                             );
                         })}
                         <div>
-                            <AddComment infoEvent={props.memory} />
+                            <AddComment
+                                infoEvent={props.memory}
+                                members={props.members}
+                                onFavCallback={props.onFavCallback}
+                            />
                         </div>
                     </div>
 

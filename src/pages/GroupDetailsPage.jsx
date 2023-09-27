@@ -63,7 +63,7 @@ function GroupDetailsPage(props) {
                         fnUpdate={getGroup}
                     />
                 </div>
-                <EventListPage />
+                <EventListPage members={group?.members} />
             </div>
             <Link to="/groups">
                 <button>Back to Groups</button>
