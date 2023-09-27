@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
+import AddComment from "./AddComment";
 
 export default function MemoryCard(props) {
     const [isClicked, setIsClicked] = useState(props.memory.favorite);
@@ -90,10 +89,6 @@ export default function MemoryCard(props) {
                         <div className=" flex p-2 justify-between">
                             {/* Font Awesome icons */}
                             <i
-                                className="far fa-comment"
-                                data-testid="comment-icon"
-                            ></i>
-                            <i
                                 className="fas fa-retweet"
                                 data-testid="retweet-icon"
                             ></i>
@@ -134,6 +129,25 @@ export default function MemoryCard(props) {
                                 className="fas fa-share"
                                 data-testid="share-icon"
                             ></i>
+                        </div>
+                        {props.memory.comments.map((comment, index) => {
+                            return (
+                                <div key={index}>
+                                    <hr className="border-t border-gray-300 w-full" />
+                                    <div className="flex items-center w-full">
+                                        <i
+                                            className="far fa-comment text-left"
+                                            data-testid="comment-icon"
+                                        ></i>
+                                        <span className="mx-auto">
+                                            {comment}
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        <div>
+                            <AddComment infoEvent={props.memory} />
                         </div>
                     </div>
 
