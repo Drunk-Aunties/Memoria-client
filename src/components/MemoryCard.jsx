@@ -4,10 +4,14 @@ import AddComment from "./AddComment";
 
 export default function MemoryCard(props) {
     const [isClicked, setIsClicked] = useState(props.memory.favorite);
+    const [showComments, setShowComments] = useState(false);
 
     const handleClick = () => {
         setIsClicked(!isClicked);
         onClickFavButton();
+    };
+    const toggleCommentsVisibility = () => {
+        setShowComments(!showComments);
     };
 
     const onClickFavButton = () => {
@@ -86,10 +90,14 @@ export default function MemoryCard(props) {
                         </span>
                         <div className=" flex p-2 justify-between">
                             {/* Font Awesome icons */}
-                            <i
-                                className="fas fa-retweet"
-                                data-testid="retweet-icon"
-                            ></i>
+
+                            <button onClick={toggleCommentsVisibility}>
+                                <i
+                                    className="far fa-comment"
+                                    data-testid="comment-icon"
+                                ></i>
+                            </button>
+
                             <button
                                 type="button"
                                 id="FavTestId"
@@ -134,17 +142,21 @@ export default function MemoryCard(props) {
                         {props.memory.comments.map((comment, index) => {
                             return (
                                 <div key={index}>
-                                    <hr className="border-t border-gray-300 w-full" />
-                                    <div className="flex items-center w-full">
-                                        <i
-                                            className="far fa-comment text-left"
-                                            data-testid="comment-icon"
-                                        ></i>
-                                        <span className="mx-auto">
-                                            {comment.text}
-                                        </span>
-                                        <p>{comment.owner}</p>
-                                    </div>
+                                    {showComments && (
+                                        <>
+                                            <hr className="border-t border-gray-300 w-full" />
+                                            <div className="flex items-center w-full">
+                                                <i
+                                                    className="far fa-comment text-left"
+                                                    data-testid="comment-icon"
+                                                ></i>
+                                                <span className="mx-auto">
+                                                    {comment.text}
+                                                </span>
+                                                <p>{comment.owner}</p>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             );
                         })}
