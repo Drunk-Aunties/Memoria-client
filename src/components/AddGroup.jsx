@@ -6,6 +6,8 @@ function AddGroup(props) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    const [showCreateForm, setShowCreateForm] = useState("hidden");
+
 
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
@@ -36,40 +38,76 @@ function AddGroup(props) {
             .then((response) => {
                 setName("");
                 setDescription("");
+                setImageUrl("")
                 props.refreshGroups();
             })
             .catch((error) => console.log(error));
     };
     return (
-        <div className="border w-1/3">
-            <h3>Create a new group</h3>
 
-            <form onSubmit={handleSubmit}>
-                <label>Name:</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className=" border border-gray"
-                />
+        <>
 
+            <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+            onClick={() => {
+                showCreateForm === "hidden"
+                ? setShowCreateForm("visible")
+                : setShowCreateForm("hidden")
+            }}
+            
+            > <img src="/public/img/logo.png" alt="" className="w-8 inline"/> + Create New Group</button>
+
+
+
+            <form onSubmit={handleSubmit} className={showCreateForm}>
+
+                <div className="flex flex-col border justify-center ">
+
+                    {/* frame and pic and name  */}
+                    <div className=" flex flex-col shadow-lg border-solid border-black bg-stone-100	w-fit items-center pb-8">
+                        <p className="text-lg font-bold">Choose a group picture</p>
+                        <br />
+
+                        <input id="imgInp" type="file" name="filename"
+                            onChange={(e) => handleFileUpload(e)} />
+                        <div className="flex justify-center items-center bg-black h-64 w-80 m-5 shadow-[inset_0_-4px_4px_rgba(0,0,0,0.6)]">
+
+
+
+                            <img id='previewPic' src={imageUrl} alt=""
+                                className=" p-0.5" />
+
+                        </div>
+
+                        <input type="text" placeholder="Enter your group name" name="name" value={name} onChange={(e) => setName(e.target.value)}
+                            className="font-bold text-xl tracking-widest text-black border p-2 text-center" />
+                        <hr />
+                    </div>
+
+                    {/* description and members  */}
+                    <div className="">
+                        <textarea
+                            rows="4" cols="40"
+                            name="description" value={description} onChange={(e) => setDescription(e.target.value)}
+                            className="text-lg p-2 text-black border m-2"
+                            placeholder="Enter description here" />
+
+                    </div>
+                </div>
                 <br />
 
-                <label>Description:</label>
-                <textarea
-                    type="text"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className=" border border-gray"
-                />
-                <br />
-                <input type="file" onChange={(e) => handleFileUpload(e)} />
+                <button className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Create Group</button>
 
-                <button type="submit">Submit</button>
+
             </form>
-        </div>
+
+        </>
+
+
+
+
+
+
+
     );
 }
 
