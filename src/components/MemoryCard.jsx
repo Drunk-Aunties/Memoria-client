@@ -1,28 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
+import AddComment from "./AddComment";
 
 export default function MemoryCard(props) {
-    const [isClicked, setIsClicked] = useState(false);
-    const { eventId } = useParams();
+    const [showComments, setShowComments] = useState(false);
+    const [isClicked, setIsClicked] = useState(props.memory.favorite);
 
+    let token = localStorage.getItem("authToken");
     const handleClick = () => {
         setIsClicked(!isClicked);
         onClickFavButton();
     };
-
-    const onClickFavButton = (e) => {
-        const requestBody = { favorite: !props.memory.favorite };
-        axios.put(
-            `${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`,
-            requestBody
-        );
-        // .then((response) => {
-        //     navigate(`/events/${eventId}`);
-        // });
+    const toggleCommentsVisibility = () => {
+        setShowComments(!showComments);
     };
 
+    const onClickFavButton = () => {
+        const requestBody = { favorite: !props.memory.favorite };
+        axios
+            .put(
+                `${import.meta.env.VITE_API_URL}/api/events/${
+                    props.memory._id
+                }`,
+                requestBody,
+                { headers: { Authorization: `Bearer ${token}` } }
+            )
+            .then(() => {
+                props.onFavCallback();
+            });
+    };
     let createdDate = new Date(props.memory.createdAt);
     let timeDiff = Date.now() - createdDate;
     let friendlyTimeStamp;
@@ -42,9 +48,6 @@ export default function MemoryCard(props) {
     } else {
         friendlyTimeStamp = `just now`;
     }
-
-    console.log(props.memory);
-
     return (
         <div className="flex border p-5 m-10 rounded-xl shadow-lg">
             {props.memory && (
@@ -52,13 +55,14 @@ export default function MemoryCard(props) {
                     <div className="flex flex-col w-full">
                         <div className="flex justify-between p-5">
                             <div className="flex justify-between">
+                                <a href={`/events/${props.memory._id}`}>
+                                    <img
+                                        src={props.memory.userId?.imageUrl}
+                                        alt=""
+                                        className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
+                                    />
+                                </a>
 
-                                <a href={`/events/${props.memory._id}`}><img
-                                    src={props.memory.userId?.imageUrl}
-                                    alt=""
-                                    className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
-                                /></a>
-                                
                                 <span className="font-bold text-xl m-2">
                                     {props.memory.userId?.name}
                                 </span>
@@ -85,24 +89,24 @@ export default function MemoryCard(props) {
                         <span className="text-right">
                             {props.memory.createdAt}
                         </span>
-
                         <div className=" flex p-2 justify-between">
                             {/* Font Awesome icons */}
-                            <i
-                                className="far fa-comment"
-                                data-testid="comment-icon"
-                            ></i>
-                            <i
-                                className="fas fa-retweet"
-                                data-testid="retweet-icon"
-                            ></i>
+
+                            <button onClick={toggleCommentsVisibility}>
+                                <i
+                                    className="far fa-comment"
+                                    data-testid="comment-icon"
+                                ></i>{" "}
+                                {props.memory.comments.length}
+                            </button>
+
                             <button
                                 type="button"
                                 id="FavTestId"
                                 onClick={handleClick}
                                 data-cy="FavTest"
                             >
-                                {props.memory.favorite || isClicked ? (
+                                {isClicked ? (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="30"
@@ -133,6 +137,37 @@ export default function MemoryCard(props) {
                                 className="fas fa-share"
                                 data-testid="share-icon"
                             ></i>
+                        </div>
+                        <span className="mx-auto">
+                            {console.log(props.memory.comments.text)}
+                        </span>
+                        {props.memory.comments.map((comment, index) => {
+                            return (
+                                <div key={index}>
+                                    {showComments && (
+                                        <>
+                                            <hr className="border-t border-gray-300 w-full" />
+                                            <div className="flex items-center w-full">
+                                                <i
+                                                    className="far fa-comment text-left"
+                                                    data-testid="comment-icon"
+                                                ></i>
+                                                <span className="mx-auto">
+                                                    {comment.text}
+                                                </span>
+                                                <p>{comment.owner}</p>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            );
+                        })}
+                        <div>
+                            <AddComment
+                                infoEvent={props.memory}
+                                members={props.members}
+                                onFavCallback={props.onFavCallback}
+                            />
                         </div>
                     </div>
 

@@ -4,7 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
 import MemoryCard from "../components/MemoryCard";
 
-function EventListPage() {
+function EventListPage(props) {
     const [memories, setMemories] = useState([]);
     const { groupId } = useParams();
 
@@ -28,20 +28,23 @@ function EventListPage() {
         getEvent();
     }, []);
 
-
     return (
         <>
-        <div className="EventListPage">
-            <div className="flex flex-col border max-w-2xl">
-                <AddEvent refreshEvents={getEvent} groupId = {groupId}/>
-                {memories &&
-                    memories.map((memory) => (
-                            <MemoryCard memory={memory} key={memory._id}  />
-                    ))}
+            <div className="EventListPage">
+                <div className="flex flex-col border max-w-2xl">
+                    <AddEvent refreshEvents={getEvent} groupId={groupId} />
+                    {memories &&
+                        memories.map((memory) => (
+                            <MemoryCard
+                                memory={memory}
+                                onFavCallback={getEvent}
+                                key={memory._id}
+                                members={props.members}
+                            />
+                        ))}
+                </div>
             </div>
-        </div>
         </>
-        
     );
 }
 
