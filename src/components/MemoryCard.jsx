@@ -3,9 +3,10 @@ import axios from "axios";
 import AddComment from "./AddComment";
 
 export default function MemoryCard(props) {
-    const [isClicked, setIsClicked] = useState(props.memory.favorite);
     const [showComments, setShowComments] = useState(false);
+    const [isClicked, setIsClicked] = useState(props.memory.favorite);
 
+    let token = localStorage.getItem("authToken");
     const handleClick = () => {
         setIsClicked(!isClicked);
         onClickFavButton();
@@ -21,13 +22,13 @@ export default function MemoryCard(props) {
                 `${import.meta.env.VITE_API_URL}/api/events/${
                     props.memory._id
                 }`,
-                requestBody
+                requestBody,
+                { headers: { Authorization: `Bearer ${token}` } }
             )
             .then(() => {
                 props.onFavCallback();
             });
     };
-
     let createdDate = new Date(props.memory.createdAt);
     let timeDiff = Date.now() - createdDate;
     let friendlyTimeStamp;
@@ -95,7 +96,8 @@ export default function MemoryCard(props) {
                                 <i
                                     className="far fa-comment"
                                     data-testid="comment-icon"
-                                ></i>
+                                ></i>{" "}
+                                {props.memory.comments.length}
                             </button>
 
                             <button
