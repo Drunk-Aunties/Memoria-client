@@ -3,16 +3,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import AddGroup from "../components/AddGroup";
 
-const API_URL = "http://localhost:5005";
-
 function GroupListPage() {
-    let token = localStorage.getItem('authToken');
+    let token = localStorage.getItem("authToken");
     const [groups, setGroups] = useState([]);
 
     const getAllGroups = () => {
         axios
-            .get(`${API_URL}/api/groups`,
-            { headers: { Authorization: `Bearer ${token}`} })
+            .get(`${import.meta.env.VITE_API_URL}/api/groups`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             .then((response) => setGroups(response.data))
             .catch((error) => console.log(error));
     };
