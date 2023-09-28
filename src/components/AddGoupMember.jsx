@@ -7,6 +7,7 @@ function AddGroupMember(props) {
     const [email, setEmail] = useState("");
     const { groupId } = useParams();
 
+
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
@@ -24,10 +25,9 @@ function AddGroupMember(props) {
     };
     return (
         <div className="border">
-            <h3>Add a new member</h3>
 
             <form onSubmit={handleSubmit}>
-                <label>Email:</label>
+                <label className="font-semibold">Email</label><br />
                 <input
                     type="email"
                     name="email"
@@ -37,7 +37,7 @@ function AddGroupMember(props) {
                 />
 
                 <br />
-                <button type="submit">Submit</button>
+                <button type="submit" className="py-2.5 px-5 mr-2 mb-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">Add</button>
             </form>
         </div>
     );

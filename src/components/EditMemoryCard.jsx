@@ -20,7 +20,7 @@ export default function EditMemoryCard(props) {
     const deleteEvent = async (e) => {
         e.preventDefault();
         console.log(props.memory._id)
-       let result = await  axios.delete(`${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`);
+       let result = await  axios.delete(`${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`,{ headers: { Authorization: `Bearer ${token}`} });
        console.log(result);
        navigate(`/groups/${props.memory.groupId._id}`)
     }

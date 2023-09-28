@@ -36,7 +36,7 @@ export default function GroupCard(props) {
 
                     {/* description and members  */}
                     <div className="">
-                        <p className=" text-lg p-2 text-black">{props.group.description}</p>
+                        <p className=" text-md font-normal p-2 text-black w-80">{props.group.description}</p>
                         <hr />
                         <p className="p-2 text-black">{props.group.members.length} members</p>
                         <hr />
