@@ -11,7 +11,6 @@ function UserDetailsPage(props) {
             .get(`${import.meta.env.VITE_API_URL}/api/users/id/${userId}`)
             .then((response) => {
                 const oneUser = response.data;
-                console.log(oneUser);
                 setUsers(oneUser);
             })
             .catch((error) => console.log(error));
