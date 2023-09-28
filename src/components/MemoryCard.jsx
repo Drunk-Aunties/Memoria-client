@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import AddComment from "./AddComment";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 export default function MemoryCard(props) {
     const [showComments, setShowComments] = useState(false);
@@ -46,8 +49,30 @@ export default function MemoryCard(props) {
     } else {
         friendlyTimeStamp = `just now`;
     }
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText('https://memoriapp.netlify.app/events/'+props.memory._id);
+        notify();
+    }
+
+    const notify = () => toast('Link to Memory copied to clipboard', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+
+
+
     return (
-        <div className="flex border p-5 m-10 rounded-xl shadow-lg">
+        
+        <div className="flex border p-5 m-5 rounded-xl shadow-lg">
+            
             {props.memory && (
                 <>
                     <div className="flex flex-col w-full">
@@ -57,37 +82,32 @@ export default function MemoryCard(props) {
                                     <img
                                         src={props.memory.userId?.imageUrl}
                                         alt=""
-                                        className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
+                                        className="h-12 w-12 rounded-full border max-w-xs overflow-hidden"
                                     />
                                 </a>
 
-                                <span className="font-bold text-xl m-2">
+                                <span className="font-normal text-lg m-2">
                                     {props.memory.userId?.name}
                                 </span>
                             </div>
 
                             <div>
-                                <p className="timestamp text-right justify-self-end">
+                                <p className="timestamp text-right justify-self-end text-sm">
                                     {friendlyTimeStamp}
                                 </p>
                             </div>
                         </div>
-                        <p className="text-2xl font-normal">
+                        <p className="text-lg font-semibold">
                             {props.memory.title}
                         </p>
-                        <br />
-                        <p className="text-xl">{props.memory.content}</p>
-                        <br />
+                        <p className="text-md font-normal text-left m-2">{props.memory.content}</p>
                         <img
                             src={props.memory.imageUrl}
                             alt=""
-                            className="rounded-lg"
+                            className="rounded-lg w-full self-center"
                         />
                         <br />
-                        <span className="text-right">
-                            {props.memory.createdAt}
-                        </span>
-                        <div className=" flex p-2 justify-between">
+                        <div className=" flex pl-2 justify-end items-center">
                             {/* Font Awesome icons */}
 
                             <button onClick={toggleCommentsVisibility}>
@@ -107,8 +127,8 @@ export default function MemoryCard(props) {
                                 {isClicked ? (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        width="30"
-                                        height="30"
+                                        width="22"
+                                        height="22"
                                         fill="red"
                                         className="bi bi-heart-fill"
                                         viewBox="0 0 16 16"
@@ -121,8 +141,8 @@ export default function MemoryCard(props) {
                                 ) : (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        width="30"
-                                        height="30"
+                                        width="22"
+                                        height="22"
                                         fill="red"
                                         className="bi bi-heart"
                                         viewBox="0 0 16 16"
@@ -131,10 +151,16 @@ export default function MemoryCard(props) {
                                     </svg>
                                 )}
                             </button>
+                            <button>
                             <i
                                 className="fas fa-share"
                                 data-testid="share-icon"
+                                onClick={copyToClipboard}
+                                
                             ></i>
+                            </button>
+                            
+                            
                         </div>
 
                         {props.memory.comments.map((comment, index) => {

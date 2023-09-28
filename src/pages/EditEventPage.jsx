@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import service from "../services/file-upload.service";
 import axios from "axios";
+import { AuthContext } from "../../context/auth.context";
+
 
 function EditEventPage(props) {
     const [title, setTitle] = useState("");
@@ -10,6 +12,8 @@ function EditEventPage(props) {
     const [imageUrl, setImageUrl] = useState("");
     const { eventId } = useParams();
     const navigate = useNavigate();
+    let token = localStorage.getItem('authToken');
+
 
     useEffect(() => {
         axios
@@ -48,7 +52,7 @@ function EditEventPage(props) {
         axios
             .put(
                 `${import.meta.env.VITE_API_URL}/api/events/${eventId}`,
-                requestBody
+                requestBody,{ headers: { Authorization: `Bearer ${token}`} }
             )
             .then((response) => {
                 navigate(`/events/${eventId}`);

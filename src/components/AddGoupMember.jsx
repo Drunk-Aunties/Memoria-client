@@ -35,7 +35,7 @@ function AddGroupMember(props) {
                 <>
                     <form onSubmit={handleSubmit}>
                         <br />
-                        <label>Email:</label>
+                        <label className="font-semibold">Email:</label>
                         <input
                             type="email"
                             name="email"
@@ -45,7 +45,12 @@ function AddGroupMember(props) {
                         />
 
                         <br />
-                        <button type="submit">Submit</button>
+                        <button
+                            type="submit"
+                            className="py-2.5 px-5 mr-2 mb-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
+                        >
+                            Submit
+                        </button>
                     </form>
                 </>
             )}

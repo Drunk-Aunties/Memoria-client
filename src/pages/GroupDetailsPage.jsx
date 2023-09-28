@@ -32,6 +32,20 @@ function GroupDetailsPage(props) {
             });
     };
 
+    const deleteMember = async (index) => {
+        try {
+            let newMemberList = group.members.map((e) => e._id);
+            newMemberList.splice(index, 1);
+            let result = await axios.put(
+                `${import.meta.env.VITE_API_URL}/api/groups/${groupId}`,
+                { members: newMemberList }
+            );
+            getGroup();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         getGroup();
     }, []);
@@ -91,10 +105,10 @@ function GroupDetailsPage(props) {
                 <button>Write Our Story</button>
             </Link>
 
-            <div className="flex flex-wrap p-10 gap-10 justify-center">
+            <div className="flex flex-wrap  gap-10 justify-center">
                 <EventListPage members={group?.members} />
 
-                <div className="flex-col w-1/2 justify-start border max-w-sm">
+                <div className="flex-col justify-start border max-w-sm p-5 rounded-lg">
                     <h5 className="text-xl font-bold leading-none text-gray-900">
                         Members
                     </h5>
@@ -102,9 +116,9 @@ function GroupDetailsPage(props) {
                         ? group.members.map((member, index) => {
                               return (
                                   <ul
+                                      key={member._id}
                                       role="list"
                                       className="divide-y divide-gray-200"
-                                      key={index}
                                   >
                                       <li className="py-3 sm:py-4">
                                           <div className="flex items-center space-x-4">
@@ -127,6 +141,15 @@ function GroupDetailsPage(props) {
                                                       {member.email}
                                                   </p>
                                               </div>
+                                              <button
+                                                  onClick={() => {
+                                                      console.log(index);
+                                                      deleteMember(index);
+                                                  }}
+                                                  className="pl-10 bg-transparent"
+                                              >
+                                                  X
+                                              </button>
                                           </div>
                                       </li>
                                       <hr />
