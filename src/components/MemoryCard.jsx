@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function MemoryCard(props) {
     const [showComments, setShowComments] = useState(false);
     const [isClicked, setIsClicked] = useState(props.memory.favorite);
-
     let token = localStorage.getItem("authToken");
     const handleClick = () => {
         setIsClicked(!isClicked);
@@ -17,9 +16,6 @@ export default function MemoryCard(props) {
     const toggleCommentsVisibility = () => {
         setShowComments(!showComments);
     };
-
-    
-
     const onClickFavButton = () => {
         const requestBody = { favorite: !props.memory.favorite };
         axios
@@ -166,9 +162,7 @@ export default function MemoryCard(props) {
                             
                             
                         </div>
-                        <span className="mx-auto">
-                            {console.log(props.memory.comments.text)}
-                        </span>
+
                         {props.memory.comments.map((comment, index) => {
                             return (
                                 <div key={index}>
