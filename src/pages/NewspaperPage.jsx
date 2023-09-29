@@ -73,7 +73,7 @@ function NewspaperPage(props) {
                         <div className="border-solid border-2 border-gray-800"></div>
                         <br />
 
-                        <h1 className="font-bold font-serif uppercase	">{headline.title}</h1>
+                        <p className="font-bold font-serif uppercase text-5xl">{headline.title}</p>
                         <br />
 
                         <div className="border-solid border-2 border-gray-800"></div>
