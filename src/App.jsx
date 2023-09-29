@@ -52,7 +52,7 @@ function App() {
                     path="/events/:eventId/edit/"
                     element={<EditEventPage />}
                 />
-                <Route path="/events/story" element={<StoryPage />} />
+                <Route path="/events/story/:groupId" element={<StoryPage />} />
                 <Route path="/users/:userId" element={<UserDetailsPage />} />
                 <Route path="/users/edit/:userId" element={<EditUserPage />} />
                 <Route path="/signup" element={<SignupPage />} />
