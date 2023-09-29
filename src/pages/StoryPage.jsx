@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function StoryPage() {
     const [story, setStory] = useState("");
     const navigate = useNavigate();
     let token = localStorage.getItem("authToken");
+    const { groupId } = useParams();
 
     const getStory = () => {
         axios
