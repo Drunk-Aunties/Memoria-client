@@ -16,23 +16,24 @@ import EditEventPage from "./pages/EditEventPage";
 import StoryPage from "./pages/StoryPage";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import NewspaperPage from "./pages/NewspaperPage";
 
 
 
 function App() {
     return (
         <>
-        <ToastContainer 
-                            position="top-right"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme="light"/>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light" />
             <Navbar />
 
             <Routes>
@@ -43,6 +44,8 @@ function App() {
                     path="/groups/edit/:groupId"
                     element={<EditGroupPage />}
                 />
+                <Route path="/groups/:groupId/newspaper" element={<NewspaperPage />} />
+
                 <Route path="/events" element={<EventListPage />} />
                 <Route path="/events/:eventId" element={<EventDetailsPage />} />
                 <Route
