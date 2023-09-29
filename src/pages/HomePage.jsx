@@ -53,7 +53,6 @@ function HomePage() {
                 },
             })
             .then((response) => {
-                console.log(response.data[10].commits_url);
                 setRepoDataClient(response.data);
                 setRepoDataServer(response.data);
             })

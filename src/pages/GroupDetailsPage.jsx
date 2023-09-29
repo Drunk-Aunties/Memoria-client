@@ -101,7 +101,7 @@ function GroupDetailsPage(props) {
                 </>
             )}
 
-            <Link to="/events/story">
+            <Link to={`/events/story/${groupId}`}>
                 <button>Write Our Story</button>
             </Link>
 

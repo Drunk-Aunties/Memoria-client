@@ -10,9 +10,12 @@ export default function StoryPage() {
 
     const getStory = () => {
         axios
-            .get(`${import.meta.env.VITE_API_URL}/api/events/story`, {
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            .get(
+                `${import.meta.env.VITE_API_URL}/api/events/story/${groupId}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            )
             .then((response) => {
                 const oneStory = response.data;
                 setStory(oneStory);
@@ -35,10 +38,32 @@ export default function StoryPage() {
     }, []);
     return (
         <>
-            <p>{story}</p>
-            <Link to="/groups">
-                <button>Back</button>
-            </Link>
+            {console.log(story)}
+            <div className="flex justify-center items-center w-auto h-auto">
+                <img
+                    src="./public/img/logo.png"
+                    alt="Image Description"
+                    className="w-auto h-auto"
+                />
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl text-center mt-5 mb-5">
+                Your Story
+            </h1>
+            <div className="flex justify-center items-center mt-10 mb-10">
+                <br />
+                <h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
+                    {story}
+                </h1>
+            </div>
+            <div className="flex justify-center items-center mt-10 mb-10">
+                <Link
+                    to="/groups"
+                    className="text-center bg-green-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl lg:text-3xl"
+                >
+                    Back
+                </Link>
+            </div>
         </>
     );
 }

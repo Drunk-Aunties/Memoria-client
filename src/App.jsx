@@ -15,10 +15,8 @@ import EventDetailsPage from "./pages/EventDetailsPage";
 import EditEventPage from "./pages/EditEventPage";
 import StoryPage from "./pages/StoryPage";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import NewspaperPage from "./pages/NewspaperPage";
-
-
 
 function App() {
     return (
@@ -33,7 +31,8 @@ function App() {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-                theme="light" />
+                theme="light"
+            />
             <Navbar />
 
             <Routes>
@@ -44,7 +43,10 @@ function App() {
                     path="/groups/edit/:groupId"
                     element={<EditGroupPage />}
                 />
-                <Route path="/groups/:groupId/newspaper" element={<NewspaperPage />} />
+                <Route
+                    path="/groups/:groupId/newspaper"
+                    element={<NewspaperPage />}
+                />
 
                 <Route path="/events" element={<EventListPage />} />
                 <Route path="/events/:eventId" element={<EventDetailsPage />} />
@@ -52,7 +54,7 @@ function App() {
                     path="/events/:eventId/edit/"
                     element={<EditEventPage />}
                 />
-                <Route path="/events/story" element={<StoryPage />} />
+                <Route path="/events/story/:groupId" element={<StoryPage />} />
                 <Route path="/users/:userId" element={<UserDetailsPage />} />
                 <Route path="/users/edit/:userId" element={<EditUserPage />} />
                 <Route path="/signup" element={<SignupPage />} />
