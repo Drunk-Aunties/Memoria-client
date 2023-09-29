@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RepositoryCard from "../components/RepositoryCard";
 import UserGithubCard from "../components/UserGithubCard";
+import CarouselSlider from "../components/CarouselSlider";
 
 function HomePage() {
     const [userDataUtku, setUserDataUtku] = useState(null);
@@ -63,6 +64,9 @@ function HomePage() {
 
     return (
         <div className="flex flex-col items-center mt-8">
+            <CarouselSlider />
+            <br />
+            <h2 className="text-4xl font-bold mt-8 mb-4">Github Repos</h2>
             {/* Display two repositories side by side at the top */}
             <div className="flex mb-4">
                 <div className="mr-4">
@@ -90,6 +94,7 @@ function HomePage() {
             </div>
 
             {/* Display two user cards side by side at the bottom */}
+            <h2 className="text-4xl font-bold mt-8 mb-4">Github Profiles</h2>
             <div className="flex">
                 <div className="mr-4">
                     {userDataUtku ? (

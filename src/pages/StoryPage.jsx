@@ -39,10 +39,9 @@ export default function StoryPage() {
     }, []);
     return (
         <>
-            {console.log(story)}
             <div className="flex justify-center items-center w-auto h-auto">
                 <img
-                    src="./public/img/logo.png"
+                    src="/img/logo.png"
                     alt="Image Description"
                     className="w-auto h-auto"
                 />
