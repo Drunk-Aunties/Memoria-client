@@ -3,42 +3,57 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function AddGroupMember(props) {
-
     const [email, setEmail] = useState("");
+    const [show, setShow] = useState(false);
     const { groupId } = useParams();
-
-
+    const toggleVisibility = () => {
+        setShow(!show);
+    };
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            let result = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/email/${email}`);
+            let result = await axios.get(
+                `${import.meta.env.VITE_API_URL}/api/users/email/${email}`
+            );
             let newMemberList = [];
-            props.members
-                ? newMemberList = props.members
-                : null;
+            props.members ? (newMemberList = props.members) : null;
             newMemberList.push(result.data._id);
-            result = await axios.put(`${import.meta.env.VITE_API_URL}/api/groups/${groupId}`, { members: newMemberList });
+            result = await axios.put(
+                `${import.meta.env.VITE_API_URL}/api/groups/${groupId}`,
+                { members: newMemberList }
+            );
             props.fnUpdate();
-            setEmail('');
+            setEmail("");
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) { console.log(error) }
     };
     return (
         <div className="border">
+            <button onClick={toggleVisibility}>Add New Member</button>
+            {show && (
+                <>
+                    <form onSubmit={handleSubmit}>
+                        <br />
+                        <label className="font-semibold">Email:</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className=" border border-gray"
+                        />
 
-            <form onSubmit={handleSubmit}>
-                <label className="font-semibold">Email</label><br />
-                <input
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className=" border border-gray"
-                />
-
-                <br />
-                <button type="submit" className="py-2.5 px-5 mr-2 mb-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">Add</button>
-            </form>
+                        <br />
+                        <button
+                            type="submit"
+                            className="py-2.5 px-5 mr-2 mb-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </>
+            )}
         </div>
     );
 }

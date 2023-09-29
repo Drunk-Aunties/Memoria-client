@@ -21,22 +21,30 @@ function UserDetailsPage(props) {
     }, []);
 
     return (
-        <div className="UserDetails">
+        <div className="bg-gray-100 min-h-screen py-12 flex flex-col items-center justify-center">
             {users && (
-                <>
-                    <h1>
+                <div className="bg-white p-8 rounded-lg shadow-md text-center">
+                    <img
+                        src={users.imageUrl}
+                        alt="User"
+                        className="w-48 h-48 mx-auto rounded-full"
+                    />
+                    <h1 className="text-3xl font-semibold mt-6">
                         Welcome {users.name} {users.lastname}
                     </h1>
-                    <img src={users.imageUrl} alt="user" width="200" />
-                    <p>Your Birthday: {users.birthdate}</p>
-                </>
+                    <p className="text-xl text-gray-600 mt-4">
+                        Your Birthday: {users.birthdate}
+                    </p>
+
+                    <div className="mt-8 space-x-4">
+                        <Link to={`/users/edit/${userId}`}>
+                            <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline-green active:bg-green-700">
+                                Edit
+                            </button>
+                        </Link>
+                    </div>
+                </div>
             )}
-            <Link to="/users">
-                <button>Back to Users</button>
-            </Link>
-            <Link to={`/users/edit/${userId}`}>
-                <button>Edit User</button>
-            </Link>
         </div>
     );
 }
