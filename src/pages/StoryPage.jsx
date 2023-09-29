@@ -34,14 +34,17 @@ export default function StoryPage() {
     };
 
     // Function to trigger text-to-speech
+    const synth = window.speechSynthesis;
     const speak = () => {
         let utterance = new SpeechSynthesisUtterance();
 
         utterance.text = story;
-        utterance.voice = window.speechSynthesis.getVoices()[13];
-        console.log(window.speechSynthesis.getVoices());
+        utterance.voice = window.speechSynthesis.getVoices()[1];
 
-        window.speechSynthesis.speak(utterance);
+        synth.speak(utterance);
+    };
+    const speakCancel = () => {
+        synth.cancel();
     };
 
     useEffect(() => {
@@ -77,7 +80,7 @@ export default function StoryPage() {
             <div className="flex justify-center items-center mt-10 mb-10">
                 <Link
                     to="/groups"
-                    className="text-center bg-green-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl lg:text-3xl"
+                    className="text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl lg:text-3xl"
                 >
                     Back
                 </Link>
@@ -88,7 +91,13 @@ export default function StoryPage() {
                     onClick={speak}
                     className="text-center bg-green-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl lg:text-3xl"
                 >
-                    Speak
+                    Read it!
+                </button>{" "}
+                <button
+                    onClick={speakCancel}
+                    className="text-center bg-red-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl lg:text-3xl"
+                >
+                    Stop Reading
                 </button>
             </div>
         </>

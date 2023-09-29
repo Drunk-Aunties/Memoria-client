@@ -100,11 +100,16 @@ function GroupDetailsPage(props) {
                     <hr className="shadow" />
                 </>
             )}
-
             <Link to={`/events/story/${groupId}`}>
-                <button>Write Our Story</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">
+                    Write Our Story
+                </button>
+            </Link>{" "}
+            <Link to={`/groups/${groupId}/newspaper`}>
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">
+                    Read the Newspaper
+                </button>
             </Link>
-
             <div className="flex flex-wrap  gap-10 justify-center">
                 <EventListPage members={group?.members} />
 
