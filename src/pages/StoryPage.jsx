@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -34,9 +33,21 @@ export default function StoryPage() {
             });
     };
 
+    // Function to trigger text-to-speech
+    const speak = () => {
+        let utterance = new SpeechSynthesisUtterance();
+
+        utterance.text = story;
+        utterance.voice = window.speechSynthesis.getVoices()[13];
+        console.log(window.speechSynthesis.getVoices());
+
+        window.speechSynthesis.speak(utterance);
+    };
+
     useEffect(() => {
         getStory();
     }, []);
+
     return (
         <>
             <div className="flex justify-center items-center w-auto h-auto">
@@ -52,9 +63,16 @@ export default function StoryPage() {
             </h1>
             <div className="flex justify-center items-center mt-10 mb-10">
                 <br />
-                <h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
-                    {story}
-                </h1>
+
+                {story ? (
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
+                        {story}
+                    </h1>
+                ) : (
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
+                        Your Story is Generating
+                    </h1>
+                )}
             </div>
             <div className="flex justify-center items-center mt-10 mb-10">
                 <Link
@@ -63,6 +81,15 @@ export default function StoryPage() {
                 >
                     Back
                 </Link>
+            </div>
+            <br />
+            <div id="text-to-speech">
+                <button
+                    onClick={speak}
+                    className="text-center bg-green-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl lg:text-3xl"
+                >
+                    Speak
+                </button>
             </div>
         </>
     );
