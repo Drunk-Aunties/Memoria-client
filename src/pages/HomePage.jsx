@@ -17,6 +17,7 @@ function HomePage() {
     );
 
     const tokenUtku = import.meta.env.VITE_UTKU_GIT_API;
+    const tokenSandrine = import.meta.env.VITE_SANDRINE_GIT_API;
 
     useEffect(() => {
         axios
@@ -35,7 +36,7 @@ function HomePage() {
         axios
             .get("https://api.github.com/user", {
                 headers: {
-                    Authorization: `token ${tokenUtku}`,
+                    Authorization: `token ${tokenSandrine}`,
                 },
             })
             .then((response) => {
