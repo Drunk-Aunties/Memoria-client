@@ -1,5 +1,6 @@
 import React from "react";
 
+// Component to display GitHub Repository on the homepage
 function RepositoryCard({ repository }) {
     return (
         <>

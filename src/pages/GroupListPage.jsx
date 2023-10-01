@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import AddGroup from "../components/AddGroup";
-import GroupCard from "../components/GroupCardComponent";
+import GroupCard from "../components/GroupCard";
 
 
 function GroupListPage() {

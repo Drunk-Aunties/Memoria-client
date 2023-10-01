@@ -23,7 +23,7 @@ function LoginPage() {
             .catch((error) => console.log(error));
     };
     return (
-        <section className="gradient-form h-full bg-neutral-200">
+        <section className="gradient-form h-full bg-neutral-200 flex flex-col items-center">
             <div className="container h-full p-10">
                 <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800">
                     <div className="w-full">
@@ -33,7 +33,7 @@ function LoginPage() {
                                     <div className="md:mx-6 md:p-12">
                                         <div className="text-center">
                                             <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold text-white">
-                                                Welcome Memoria
+                                                Welcome to Memoria
                                             </h4>
                                         </div>
                                         <p className="mb-4 text-white">
@@ -47,7 +47,7 @@ function LoginPage() {
                                         >
                                             <input
                                                 type="text"
-                                                className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                                className=" text-white peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none:placeholder:opacity-0"
                                                 id="email"
                                                 placeholder="Email"
                                                 name="email"
@@ -63,7 +63,7 @@ function LoginPage() {
                                             <br />
                                             <input
                                                 type="password"
-                                                className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none:placeholder:opacity-0"
+                                                className=" text-white peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none:placeholder:opacity-0"
                                                 id="password"
                                                 placeholder="Password"
                                                 name="password"
@@ -83,7 +83,7 @@ function LoginPage() {
                                                 data-te-ripple-init
                                                 data-te-ripple-color="light"
                                                 style={{
-                                                    background: "#ffc000",
+                                                    background: "#f3dac8",
                                                 }}
                                             >
                                                 Log in
@@ -122,7 +122,7 @@ function LoginPage() {
                                             alt="logo"
                                         />
                                         <h4 className="mb-6 text-xl font-semibold text-center">
-                                            We are more than just a company
+                                            We are more than just a social media
                                         </h4>
                                         <p className="text-sm text-center">
                                             Lorem ipsum dolor sit amet,

@@ -12,7 +12,6 @@ import ErrorPage from "./pages/ErrorPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import EditUserPage from "./pages/EditUserPage";
 import EventDetailsPage from "./pages/EventDetailsPage";
-import EditEventPage from "./pages/EditEventPage";
 import StoryPage from "./pages/StoryPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,18 +20,7 @@ import NewspaperPage from "./pages/NewspaperPage";
 function App() {
     return (
         <>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
+            <ToastContainer/>
             <Navbar />
 
             <Routes>
@@ -50,10 +38,6 @@ function App() {
 
                 <Route path="/events" element={<EventListPage />} />
                 <Route path="/events/:eventId" element={<EventDetailsPage />} />
-                <Route
-                    path="/events/:eventId/edit/"
-                    element={<EditEventPage />}
-                />
                 <Route path="/events/story/:groupId" element={<StoryPage />} />
                 <Route path="/users/:userId" element={<UserDetailsPage />} />
                 <Route path="/users/edit/:userId" element={<EditUserPage />} />

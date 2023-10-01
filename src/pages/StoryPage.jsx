@@ -40,6 +40,7 @@ export default function StoryPage() {
 
         utterance.text = story;
         utterance.voice = window.speechSynthesis.getVoices()[1];
+        //Order will differ per user Need to specifically look for English UK --- to modify later (Refactoring Blabla)
 
         synth.speak(utterance);
     };
@@ -67,15 +68,12 @@ export default function StoryPage() {
             <div className="flex justify-center items-center mt-10 mb-10">
                 <br />
 
-                {story ? (
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
-                        {story}
-                    </h1>
-                ) : (
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
-                        Your Story is Generating
-                    </h1>
-                )}
+                {story
+                    ? (<h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
+                        {story}</h1>)
+                    : (<h1 className="text-2xl md:text-3xl lg:text-4xl text-center w-3/4 leading-relaxed">
+                        Your Story is Generating</h1>)
+                }
             </div>
             <div className="flex justify-center items-center mt-10 mb-10">
                 <Link

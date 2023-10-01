@@ -1,28 +1,27 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import AddGroupMember from "../components/AddGoupMember";
-import EventListPage from "../pages/EventListPage";
+import { useNavigate, useParams } from "react-router-dom";
 
 function NewspaperPage(props) {
+    //Functional States & Variables
+    const { groupId } = useParams();
+    let token = localStorage.getItem("authToken");
     const navigate = useNavigate();
     const [data, setData] = useState(null);
+
+    //Conditional Visibility and Design Variables
     const [headline, setHeadline] = useState({});
     const [col1, setCol1] = useState([]);
     const [col2, setCol2] = useState([]);
     const [col3, setCol3] = useState([]);
 
-
-    const { groupId } = useParams();
-    let token = localStorage.getItem("authToken");
-
+    //Gets 10 last articles for a given group
     const getData = () => {
         axios
             .get(`${import.meta.env.VITE_API_URL}/api/groups/${groupId}/newspaper`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                console.log(response)
                 const data = response.data;
                 setData(data);
                 pickHeadline();
@@ -40,6 +39,7 @@ function NewspaperPage(props) {
             });
     };
 
+    //Isolates a random memory for the headline within records that contains a picture
     function pickHeadline() {
         if (data) {
             let memoriesWithPictures = data.memories.filter((memory) => { return memory.imageUrl });
@@ -56,7 +56,6 @@ function NewspaperPage(props) {
 
     useEffect(() => {
         getData();
-
     }, []);
 
     useEffect(() => {
@@ -83,11 +82,6 @@ function NewspaperPage(props) {
                             <img src={headline.imageUrl} alt="" className="max-w-md  max-h-1/4 m-5 float-right shadow" />
                             <div className="text-left m-5 font-serif text-lg">{headline.gptComment}</div>
                         </div>
-
-
-
-
-
                     </>
                 }
 
@@ -96,8 +90,7 @@ function NewspaperPage(props) {
                     <div>
                         {col1.map((memory) => {
                             return (
-                                <div className="p-5">
-                                    
+                                <div className="p-5" key={memory._id}>
                                     <p className=" tracking-wider font-serif text-left">{memory.title}</p>
                                     <div className="mt-2  mb-2 border border-gray-800"></div>
                                     <img src={memory.imageUrl} alt="" className="max-h-64 m-auto "/>
@@ -113,7 +106,7 @@ function NewspaperPage(props) {
                     <div>
                         {col2.map((memory) => {
                             return (
-                                <div className="p-5">
+                                <div className="p-5" key={memory._id}>
                                     
                                     <p className=" tracking-wider font-serif text-left">{memory.title}</p>
                                     <div className="mt-2  mb-2 border border-gray-800"></div>
@@ -130,7 +123,7 @@ function NewspaperPage(props) {
                     <div>
                         {col3.map((memory) => {
                             return (
-                                <div className="p-5">
+                                <div className="p-5" key={memory._id}>
                                     
                                     <p className=" tracking-wider font-serif text-left">{memory.title}</p>
                                     <div className="mt-2  mb-2 border border-gray-800"></div>
@@ -144,16 +137,8 @@ function NewspaperPage(props) {
                         </div>
                     }
                 </div>
-
-
-
             </div>
-
         </div>
-
-
-
-
     );
 }
 

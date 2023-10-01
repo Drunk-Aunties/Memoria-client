@@ -18,7 +18,7 @@ function SignUp() {
             .catch((error) => console.log(error));
     };
     return (
-        <section className="gradient-form h-full bg-neutral-200">
+        <section className="flex flex-col items-center gradient-form h-full bg-neutral-200">
             <div className="container h-full p-10">
                 <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800">
                     <div className="w-full">
@@ -35,21 +35,15 @@ function SignUp() {
                                             onSubmit={handleSubmit}
                                             className="mb-4 text-white"
                                         >
-                                            <label className="block">
-                                                Name:
-                                            </label>
                                             <input
                                                 type="text"
                                                 name="name"
                                                 onChange={(e) =>
                                                     (user.name = e.target.value)
                                                 }
-                                                className="border border-gray"
+                                                className="text-white peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none:placeholder:opacity-0"
+                                                placeholder="Name"
                                             />
-
-                                            <label className="block">
-                                                Email:
-                                            </label>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -57,12 +51,9 @@ function SignUp() {
                                                     (user.email =
                                                         e.target.value)
                                                 }
-                                                className="border border-gray"
+                                                className="text-white peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none:placeholder:opacity-0"
+                                                placeholder="Email"
                                             />
-
-                                            <label className="block">
-                                                Password:
-                                            </label>
                                             <input
                                                 type="password"
                                                 name="password"
@@ -70,7 +61,8 @@ function SignUp() {
                                                     (user.password =
                                                         e.target.value)
                                                 }
-                                                className="border border-gray"
+                                                className="text-white peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none:placeholder:opacity-0"
+                                                placeholder="Password"
                                             />
 
                                             <br />
@@ -81,7 +73,7 @@ function SignUp() {
                                                 data-te-ripple-init
                                                 data-te-ripple-color="light"
                                                 style={{
-                                                    background: "#ffc000",
+                                                    background: "#f3dac8",
                                                 }}
                                             >
                                                 Submit

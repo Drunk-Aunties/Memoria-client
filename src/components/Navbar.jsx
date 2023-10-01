@@ -3,12 +3,10 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 
 export default function Navbar() {
-    const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+    const {user, logOutUser } = useContext(AuthContext);
 
     return (
         <>
-
-
             <nav className="bg-black w-screen">
                 <div className="max-w-full flex flex-wrap items-center justify-between mx-5">
                     <a href="/" className="flex items-center">
