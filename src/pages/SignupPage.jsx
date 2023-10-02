@@ -1,21 +1,46 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignUp() {
     const navigate = useNavigate();
 
     const [user, setUser] = useState({ email: "", password: "", name: "" });
 
+    const validateForm = () => {
+        if (!user.name || !user.email || !user.password) {
+            toast.error("Please fill in all fields.");
+            return false;
+        }
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(user.email)) {
+            toast.error("Please enter a valid email address.");
+            return false;
+        }
+
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if (!passwordPattern.test(user.password)) {
+            toast.error(
+                "Password must be at least 6 characters and contain at least one number, one lowercase, and one uppercase letter."
+            );
+            return false;
+        }
+        return true;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios
-            .post(`${import.meta.env.VITE_API_URL}/auth/signup`, user)
-            .then((response) => {
-                console.log(response);
-                navigate("/login");
-            })
-            .catch((error) => console.log(error));
+
+        if (validateForm()) {
+            axios
+                .post(`${import.meta.env.VITE_API_URL}/auth/signup`, user)
+                .then((response) => {
+                    console.log(response);
+                    navigate("/login");
+                })
+                .catch((error) => console.log(error));
+        }
     };
     return (
         <section className="flex flex-col items-center gradient-form h-full bg-neutral-200">

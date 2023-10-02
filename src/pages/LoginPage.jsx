@@ -2,25 +2,41 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
+import { toast } from "react-toastify";
 
 function LoginPage() {
+    const [user, setUser] = useState({ email: "", password: "" });
     const { storeToken, authenticateUser } = useContext(AuthContext);
-
     const navigate = useNavigate();
 
-    const [user, setUser] = useState({ email: "", password: "" });
+    const validateForm = () => {
+        if (!user.email || !user.password) {
+            toast.error("Please fill in all fields.");
+            return false;
+        }
+        return true;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios
-            .post(`${import.meta.env.VITE_API_URL}/auth/login`, user)
-            .then((response) => {
-                console.log(response.data.authToken);
-                storeToken(response.data.authToken);
-                authenticateUser();
-                navigate("/");
-            })
-            .catch((error) => console.log(error));
+
+        if (validateForm()) {
+            axios
+                .post(`${import.meta.env.VITE_API_URL}/auth/login`, user)
+                .then((response) => {
+                    console.log(response.data.authToken);
+                    storeToken(response.data.authToken);
+                    authenticateUser();
+                    navigate("/");
+                })
+                .catch((error) => {
+                    if (error.response && error.response.status === 401) {
+                        toast.error("Incorrect credentials. Please try again.");
+                    } else {
+                        console.log(error);
+                    }
+                });
+        }
     };
     return (
         <section className="gradient-form h-full bg-neutral-200 flex flex-col items-center">
