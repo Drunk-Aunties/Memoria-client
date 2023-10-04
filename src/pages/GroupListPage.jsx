@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import AddGroup from "../components/AddGroup";
 import GroupCard from "../components/GroupCard";
-
 
 function GroupListPage() {
     let token = localStorage.getItem("authToken");
@@ -23,22 +21,17 @@ function GroupListPage() {
 
     return (
         <div className="flex flex-col w-full justify-center items-center gap-10 p-2">
-
             <AddGroup refreshGroups={getAllGroups} />
             <div className="flex flex-wrap max-w-screen-xl gap-10">
                 {groups.map((group) => {
-                    return (
-                        group
-                        ? <GroupCard group= {group} key= {group._id}></GroupCard>
-                        : <p>Loading....</p>
+                    return group ? (
+                        <GroupCard group={group} key={group._id}></GroupCard>
+                    ) : (
+                        <p>Loading....</p>
                     );
                 })}
-                
             </div>
-
-
         </div>
-        
     );
 }
 

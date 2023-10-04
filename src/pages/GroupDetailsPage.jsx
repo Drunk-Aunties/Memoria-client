@@ -5,7 +5,6 @@ import AddGroupMember from "../components/AddGoupMember";
 import EventListPage from "../pages/EventListPage";
 
 function GroupDetailsPage(props) {
-
     //Functional States & Variables
     const navigate = useNavigate();
     const [group, setGroup] = useState(null);
@@ -59,7 +58,6 @@ function GroupDetailsPage(props) {
                     {/* HEADER FULL WIDTH */}
                     <div className=" w-screen flex flex-wrap justify-center items-center bg-gradient-to-r from-purple-50 to-orange-50 shadow-lg  ">
                         <div className="flex w-full max-w-6xl items-center">
-
                             {/* Frame, Group Picture, Group Name  */}
                             <div className=" flex flex-col shadow-lg border-solid border-black bg-stone-100 items-center pb-3 ">
                                 <div className="flex justify-center items-center bg-black h-32 w-32 m-2 shadow-[inset_0_-4px_4px_rgba(0,0,0,0.6)]">
@@ -73,9 +71,10 @@ function GroupDetailsPage(props) {
                                         className=" p-0.5"
                                     />
                                 </div>
-                                <p className="font-bold text-lg tracking-widest text-black ">{group.name}</p>
+                                <p className="font-bold text-lg tracking-widest text-black ">
+                                    {group.name}
+                                </p>
                             </div>
-
 
                             {/* Description */}
                             <div className="flex flex-wrap grow justify-between">
@@ -85,14 +84,21 @@ function GroupDetailsPage(props) {
 
                                 {/* Number of members and memories */}
                                 <p className="text-left font-semibold p-2 max-w-sm mr-8">
-                                    <img src="/img/members-logo.png" alt="Member icon" className="h-5 m-2 inline" />
+                                    <img
+                                        src="/img/members-logo.png"
+                                        alt="Member icon"
+                                        className="h-5 m-2 inline"
+                                    />
                                     {group.members.length} Members
                                     <br />
-                                    <img src="/public/img/logo.png" alt="Memoria icon" className="h-5 m-2 inline" />
+                                    <img
+                                        src="/public/img/logo.png"
+                                        alt="Memoria icon"
+                                        className="h-5 m-2 inline"
+                                    />
                                     16 Memories
                                 </p>
                             </div>
-
                         </div>
                     </div>
                     <br />
@@ -101,12 +107,15 @@ function GroupDetailsPage(props) {
 
             {/* LINKS PODCAST AND NEWSPAPER */}
             <Link to={`/events/story/${groupId}`}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">Write Our Story</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">
+                    Write Our Story
+                </button>
             </Link>
             <Link to={`/groups/${groupId}/newspaper`}>
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">Read the Newspaper</button>
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">
+                    Read the Newspaper
+                </button>
             </Link>
-
 
             {/* BODY: POSTS */}
             <div className="flex flex-wrap  gap-10 justify-center">
@@ -114,46 +123,52 @@ function GroupDetailsPage(props) {
 
                 {/* BODY: MEMBERS */}
                 <div className="flex-col justify-start border max-w-sm p-5 rounded-lg">
-                    <h5 className="text-xl font-bold leading-none text-gray-900">Members</h5>
+                    <h5 className="text-xl font-bold leading-none text-gray-900">
+                        Members
+                    </h5>
                     {group?.members
                         ? group.members.map((member, index) => {
-                            return (
-                                <ul key={member._id} role="list" className="divide-y divide-gray-200">
-                                    <li className="py-3 sm:py-4">
-                                        <div className="flex items-center space-x-4">
-                                            <div className="flex-shrink-0">
-                                                <img
-                                                    className="w-8 h-8 rounded-full ml-2"
-                                                    src={
-                                                        member.imageUrl
-                                                            ? member.imageUrl
-                                                            : "/img/unknown-profile.png"
-                                                    }
-                                                    alt="Profile Picture"
-                                                />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-medium text-gray-900 truncate text-left">
-                                                    {member.name}</p>
-                                                <p className="text-sm text-gray-500 truncate text-left">
-                                                    {member.email}
-                                                </p>
-                                            </div>
-                                            <button
-                                                onClick={() => {
-                                                    console.log(index);
-                                                    deleteMember(index);
-                                                }}
-                                                className="pl-10 bg-transparent"
-                                            >
-                                                X
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <hr />
-                                </ul>
-                            );
-                        })
+                              return (
+                                  <ul
+                                      key={member._id}
+                                      role="list"
+                                      className="divide-y divide-gray-200"
+                                  >
+                                      <li className="py-3 sm:py-4">
+                                          <div className="flex items-center space-x-4">
+                                              <div className="flex-shrink-0">
+                                                  <img
+                                                      className="w-8 h-8 rounded-full ml-2"
+                                                      src={
+                                                          member.imageUrl
+                                                              ? member.imageUrl
+                                                              : "/img/unknown-profile.png"
+                                                      }
+                                                      alt="Profile Picture"
+                                                  />
+                                              </div>
+                                              <div className="flex-1 min-w-0">
+                                                  <p className="text-sm font-medium text-gray-900 truncate text-left">
+                                                      {member.name}
+                                                  </p>
+                                                  <p className="text-sm text-gray-500 truncate text-left">
+                                                      {member.email}
+                                                  </p>
+                                              </div>
+                                              <button
+                                                  onClick={() => {
+                                                      deleteMember(index);
+                                                  }}
+                                                  className="pl-10 bg-transparent"
+                                              >
+                                                  X
+                                              </button>
+                                          </div>
+                                      </li>
+                                      <hr />
+                                  </ul>
+                              );
+                          })
                         : null}
                     <br />
                     <AddGroupMember
@@ -162,8 +177,12 @@ function GroupDetailsPage(props) {
                     />
                 </div>
             </div>
-            <Link to="/groups"><button>Back to Groups</button></Link>
-            <Link to={`/groups/edit/${groupId}`}><button>Edit Group</button></Link>
+            <Link to="/groups">
+                <button>Back to Groups</button>
+            </Link>
+            <Link to={`/groups/edit/${groupId}`}>
+                <button>Edit Group</button>
+            </Link>
         </div>
     );
 }
