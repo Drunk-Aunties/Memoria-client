@@ -5,12 +5,10 @@ import App from "./App.jsx";
 import "./index.css";
 import { AuthProviderWrapper } from "../context/auth.context.jsx";
 
-
-
 ReactDOM.createRoot(document.getElementById("root")).render(
-        <Router>
-            <AuthProviderWrapper>
-                <App />
-            </AuthProviderWrapper>
-        </Router>
+    <Router>
+        <AuthProviderWrapper>
+            <App />
+        </AuthProviderWrapper>
+    </Router>
 );
