@@ -4,6 +4,7 @@ import axios from "axios";
 import AddGroup from "../components/AddGroup";
 import GroupCard from "../components/GroupCard";
 import { Link } from "react-router-dom";
+import IntroPage from "../components/IntroPage";
 
 function GroupListPage() {
     const [groups, setGroups] = useState([]);
@@ -43,19 +44,7 @@ function GroupListPage() {
                 </>
             ) : (
                 <>
-                    <p>Please Login to see the groups</p>
-                    <div>
-                        <Link to="/signup">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">
-                                Sign up
-                            </button>
-                        </Link>
-                        <Link to="/login">
-                            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">
-                                Login
-                            </button>
-                        </Link>
-                    </div>
+                    <IntroPage />
                 </>
             )}
         </div>
