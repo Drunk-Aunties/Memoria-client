@@ -17,7 +17,7 @@ function UserDetailsPage() {
             })
             .catch((error) => console.log(error));
     };
-    const getEvents = () => {
+    const getEvent = () => {
         axios
             .get(`${import.meta.env.VITE_API_URL}/api/events`)
             .then((response) => {
@@ -32,17 +32,17 @@ function UserDetailsPage() {
 
     useEffect(() => {
         getUser();
-        getEvents();
+        getEvent();
     }, []);
 
     return (
-        <div className="bg-gray-100 flex flex-col center">
+        <div className="bg-gray-100 flex flex-col">
             {users && (
                 <>
-                    <div className="bg-gray-100 min-h-screen py-12 flex justify-center items-center">
-                        <div className="w-1/4 p-4 sticky top-0">
+                    <div className=" flex justify-center">
+                        <div className="w-1/4 p-4">
                             {users && (
-                                <div className="bg-white p-8 rounded-lg shadow-md text-center">
+                                <div className="bg-white p-8 rounded-lg shadow-md text-center sticky top-10">
                                     <img
                                         src={users.imageUrl}
                                         alt="User"
@@ -65,12 +65,12 @@ function UserDetailsPage() {
                                 </div>
                             )}
                         </div>
-                        <div className="w-2/4 p-4 overflow-y-auto">
+                        <div className="w-2/4 p-4">
                             {memories &&
                                 memories.map((memory) => (
                                     <MemoryCard
                                         memory={memory}
-                                        onFavCallback={getEvents}
+                                        onFavCallback={getEvent}
                                         key={memory._id}
                                     />
                                 ))}
