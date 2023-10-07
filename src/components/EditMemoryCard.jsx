@@ -7,7 +7,7 @@ export default function EditMemoryCard(props) {
     //Functional States and Variables
     const navigate = useNavigate();
     const { eventId } = useParams();
-    let token = localStorage.getItem('authToken');
+    let token = localStorage.getItem("authToken");
 
     //Form States
     const [title, setTitle] = useState(props.memory.title);
@@ -16,14 +16,16 @@ export default function EditMemoryCard(props) {
 
     //Function to delete Memory from DB
     const deleteEvent = async (e) => {
-        let result = await axios.delete(`${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`, { headers: { Authorization: `Bearer ${token}` } });
-        navigate(`/groups/${props.memory.groupId._id}`)
-    }
+        let result = await axios.delete(
+            `${import.meta.env.VITE_API_URL}/api/events/${props.memory._id}`,
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+        navigate(`/groups/${props.memory.groupId._id}`);
+    };
 
     //Function to upload File
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
-        console.log("The file to be uploaded is: ", e.target.files[0]);
         uploadData.append("imageUrl", e.target.files[0]);
 
         service
@@ -31,29 +33,29 @@ export default function EditMemoryCard(props) {
             .then((response) => {
                 // response carries "fileUrl" which we can use to update the state
                 setImageUrl(response.fileUrl);
-                console.log("response is: ", response);
             })
             .catch((err) =>
                 console.log("Error while uploading the file: ", err)
             );
     };
 
-    //Function to update Memory 
+    //Function to update Memory
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const requestBody = { title, content, imageUrl };
         axios
-            .put(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`,
-                requestBody, { headers: { Authorization: `Bearer ${token}` } })
+            .put(
+                `${import.meta.env.VITE_API_URL}/api/events/${eventId}`,
+                requestBody,
+                { headers: { Authorization: `Bearer ${token}` } }
+            )
             .then((response) => {
                 navigate(`/events/${eventId}`);
             });
     };
 
     return (
-
         <div className="flex flex-col items-center justify-center">
-
             {props.memory && (
                 <>
                     {/* Update and Delete buttons */}
@@ -125,7 +127,6 @@ export default function EditMemoryCard(props) {
                                 <span className="text-right">
                                     {props.memory.createdAt}
                                 </span>
-
                             </div>
                         </form>
                     </div>
@@ -134,4 +135,3 @@ export default function EditMemoryCard(props) {
         </div>
     );
 }
-

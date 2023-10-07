@@ -4,11 +4,11 @@ import service from "../services/file-upload.service";
 import { AuthContext } from "../../context/auth.context";
 
 function AddEvent(props) {
-    //Functional States 
+    //Functional States
     let token = localStorage.getItem("authToken");
     const { isLoggedIn, user } = useContext(AuthContext);
 
-    //New Event Form States 
+    //New Event Form States
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [imageUrl, setImageUrl] = useState("");
@@ -16,23 +16,21 @@ function AddEvent(props) {
     //Conditional Visibility States
     const [showCreateForm, setShowCreateForm] = useState("hidden");
 
-    //Uploads image and stores image URL 
+    //Uploads image and stores image URL
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
-        console.log("The file to be uploaded is: ", e.target.files[0]);
         uploadData.append("imageUrl", e.target.files[0]);
         service
             .uploadImage(uploadData)
             .then((response) => {
                 setImageUrl(response.fileUrl);
-                console.log("response is: ", response);
             })
             .catch((err) =>
                 console.log("Error while uploading the file: ", err)
             );
     };
 
-    //Submit Form - Creates new record in DB 
+    //Submit Form - Creates new record in DB
     const handleSubmit = (e) => {
         e.preventDefault();
         const { groupId } = props;
@@ -62,31 +60,37 @@ function AddEvent(props) {
                     showCreateForm === "hidden"
                         ? setShowCreateForm("visible")
                         : setShowCreateForm("hidden");
-                }}>
+                }}
+            >
                 Add a Memory
             </button>
 
             {user && (
                 <>
                     <div
-                        className={"flex border p-5 m-10 rounded-xl shadow-lg max-w-3xl w-full " +
-                            showCreateForm} //Conditional visibility of the form handled in class name
+                        className={
+                            "flex border p-5 m-10 rounded-xl shadow-lg max-w-3xl w-full " +
+                            showCreateForm
+                        } //Conditional visibility of the form handled in class name
                     >
                         {/* Form to add memory */}
                         <form className="w-full">
                             <div className="flex flex-col w-full">
-
                                 {/* User Picture & Name */}
                                 <div className="flex justify-between p-5">
                                     <div className="flex justify-between">
                                         <img
-                                            src={user.imageUrl
-                                                ? user.imageUrl
-                                                : "/public/img/unknown-profile.png"} //displays standard profile image
+                                            src={
+                                                user.imageUrl
+                                                    ? user.imageUrl
+                                                    : "/public/img/unknown-profile.png"
+                                            } //displays standard profile image
                                             alt="User Profile Picture"
                                             className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
                                         />
-                                        <span className="font-bold text-xl m-2">{user.name}</span>
+                                        <span className="font-bold text-xl m-2">
+                                            {user.name}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -121,11 +125,10 @@ function AddEvent(props) {
                             </div>
                             <button
                                 className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                                onClick={handleSubmit}>
+                                onClick={handleSubmit}
+                            >
                                 Add
                             </button>
-
-
                         </form>
                     </div>
                 </>

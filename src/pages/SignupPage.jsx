@@ -31,12 +31,10 @@ function SignUp() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (validateForm()) {
             axios
                 .post(`${import.meta.env.VITE_API_URL}/auth/signup`, user)
                 .then((response) => {
-                    console.log(response);
                     navigate("/login");
                 })
                 .catch((error) => console.log(error));

@@ -24,7 +24,6 @@ function LoginPage() {
             axios
                 .post(`${import.meta.env.VITE_API_URL}/auth/login`, user)
                 .then((response) => {
-                    console.log(response.data.authToken);
                     storeToken(response.data.authToken);
                     authenticateUser();
                     navigate("/");

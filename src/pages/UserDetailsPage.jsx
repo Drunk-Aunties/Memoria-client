@@ -25,7 +25,6 @@ function UserDetailsPage() {
                 const personalPosts = allPosts.filter((e) => {
                     return e.userId._id === userId;
                 });
-                console.log(personalPosts);
                 setMemories(personalPosts);
             })
             .catch((error) => console.log(error));

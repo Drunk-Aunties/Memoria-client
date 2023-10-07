@@ -24,7 +24,6 @@ function AddGroup(props) {
             .then((response) => {
                 // response carries "fileUrl" which we can use to update the state
                 setImageUrl(response.fileUrl);
-                console.log("response is: ", response);
             })
             .catch((err) =>
                 console.log("Error while uploading the file: ", err)
