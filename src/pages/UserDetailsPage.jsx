@@ -69,7 +69,6 @@ function UserDetailsPage() {
                                 memories.map((memory) => (
                                     <MemoryCard
                                         memory={memory}
-                                        onFavCallback={getEvent}
                                         key={memory._id}
                                     />
                                 ))}
