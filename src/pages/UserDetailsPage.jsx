@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import MemoryCard from "../components/MemoryCard";
 
-function UserDetailsPage(props) {
+function UserDetailsPage() {
     const [users, setUsers] = useState([]);
     const [memories, setMemories] = useState([]);
     const { userId } = useParams();
