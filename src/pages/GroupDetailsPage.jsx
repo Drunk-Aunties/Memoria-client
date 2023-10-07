@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AddGroupMember from "../components/AddGoupMember";
 import EventListPage from "../pages/EventListPage";
 
@@ -92,7 +92,7 @@ function GroupDetailsPage(props) {
                                     {group.members.length} Members
                                     <br />
                                     <img
-                                        src="/public/img/logo.png"
+                                        src="/img/logo.png"
                                         alt="Memoria icon"
                                         className="h-5 m-2 inline"
                                     />
