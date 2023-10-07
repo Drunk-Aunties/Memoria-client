@@ -21,8 +21,7 @@ function UserDetailsPage() {
         axios
             .get(`${import.meta.env.VITE_API_URL}/api/events`)
             .then((response) => {
-                const allPosts = response.data;
-                const personalPosts = allPosts.filter((e) => {
+                const personalPosts = response.data.filter((e) => {
                     return e.userId._id === userId;
                 });
                 setMemories(personalPosts);

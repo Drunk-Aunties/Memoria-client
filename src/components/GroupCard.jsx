@@ -12,7 +12,7 @@ export default function GroupCard(props) {
                                 src={
                                     props.group.imageUrl
                                         ? props.group.imageUrl
-                                        : "/public/img/logo.png"
+                                        : "/img/logo.png"
                                 }
                                 alt="Group Image"
                                 className="w-full h-full object-cover rounded-lg"

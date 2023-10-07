@@ -83,7 +83,7 @@ function AddEvent(props) {
                                             src={
                                                 user.imageUrl
                                                     ? user.imageUrl
-                                                    : "/public/img/unknown-profile.png"
+                                                    : "/img/unknown-profile.png"
                                             } //displays standard profile image
                                             alt="User Profile Picture"
                                             className="h-14 w-14 rounded-full border max-w-xs overflow-hidden"
