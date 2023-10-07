@@ -134,7 +134,7 @@ function LoginPage() {
                                     <div className="px-4 py-6 text-black md:mx-6 md:p-12">
                                         <img
                                             className="mx-auto w-48 black"
-                                            src="../../public/img/logo.png"
+                                            src="/img/logo.png"
                                             alt="logo"
                                         />
                                         <h4 className="mb-6 text-xl font-semibold text-center">
