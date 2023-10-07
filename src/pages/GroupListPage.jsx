@@ -3,7 +3,6 @@ import { AuthContext } from "../../context/auth.context";
 import axios from "axios";
 import AddGroup from "../components/AddGroup";
 import GroupCard from "../components/GroupCard";
-import { Link } from "react-router-dom";
 import IntroPage from "../components/IntroPage";
 
 function GroupListPage() {
@@ -19,7 +18,6 @@ function GroupListPage() {
             .catch((error) => console.log(error));
     };
     useEffect(() => {
-        console.log(user);
         getAllGroups();
     }, []);
 
