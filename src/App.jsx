@@ -27,15 +27,8 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/groups" element={<GroupListPage />} />
                 <Route path="/groups/:groupId" element={<GroupDetailsPage />} />
-                <Route
-                    path="/groups/edit/:groupId"
-                    element={<EditGroupPage />}
-                />
-                <Route
-                    path="/groups/:groupId/newspaper"
-                    element={<NewspaperPage />}
-                />
-
+                <Route path="/groups/edit/:groupId" element={<EditGroupPage />}/>
+                <Route path="/groups/:groupId/newspaper" element={<NewspaperPage />}/>
                 <Route path="/events" element={<EventListPage />} />
                 <Route path="/events/:eventId" element={<EventDetailsPage />} />
                 <Route path="/events/story/:groupId" element={<StoryPage />} />

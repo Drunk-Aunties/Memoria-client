@@ -7,7 +7,7 @@ function fnFriendlyTimeStamp(time) {
     let friendlyTimeStamp;
 
     // More than 10 days
-    if (timeDiff > 864000000) { friendlyTimeStamp = `on ${props.memory.createdAt.slice(0, 10)}`;} 
+    if (timeDiff > 864000000) { friendlyTimeStamp = `on ${time.memory.createdAt.slice(0, 10)}`;} 
     
     //2-10 days
     else if (timeDiff > 172800000) {friendlyTimeStamp = `${Math.floor(timeDiff / 86400000)} days ago`;} 
