@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AddEvent from "../components/AddEvent";
 import MemoryCard from "../components/MemoryCard";
 
@@ -31,15 +31,16 @@ function EventListPage(props) {
     return (
         <>
             <div className="EventListPage">
-                <div className="flex flex-col border max-w-2xl">
+                <div className="flex flex-col max-w-2xl">
+
                     <AddEvent refreshEvents={getEvent} groupId={groupId} />
+
                     {memories &&
                         memories.map((memory) => (
                             <MemoryCard
                                 memory={memory}
                                 onFavCallback={getEvent}
                                 key={memory._id}
-                                members={props.members}
                             />
                         ))}
                 </div>

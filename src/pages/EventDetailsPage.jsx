@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import MemoryCard from "../components/MemoryCard";
+import EditMemoryCard from "../components/EditMemoryCard";
 
 function EventDetailsPage(props) {
+    //Functional States and Variables
     const [events, setEvents] = useState();
     const { eventId } = useParams();
+
+    //Conditional Visibility States
+    const [updateView, setUpdateView] = useState(false);
 
     const getEvent = () => {
         axios
@@ -28,10 +33,12 @@ function EventDetailsPage(props) {
                     <Link to={`/groups/${events.groupId._id}`}>
                         <button>Back to Events</button>
                     </Link>
-                    <Link to={`/events/${eventId}/edit/`}>
-                        <button>Edit Event</button>
-                    </Link>
-                    <MemoryCard memory={events} />
+
+                    <button onClick={() => { setUpdateView(!updateView) }}>Edit Event</button>
+                    {updateView
+                        ? <EditMemoryCard memory={events} />
+                        : <MemoryCard memory={events} />
+                    }
                 </div>
             )}
         </div>
